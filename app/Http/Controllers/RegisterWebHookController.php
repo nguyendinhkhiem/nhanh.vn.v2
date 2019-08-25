@@ -73,19 +73,19 @@ class RegisterWebHookController extends Controller
     public function listenOrderGhtk(Request $request)
     {
         $data = $request->all();
-        var_dump($data);
+        Log::info($data);
         switch ($_GET['able']) {
             case 'giaohangtietkiem.vn':
                 $orderGhtk = Deliverys::where('label', $data['label_id'])->update(['status_id' => $data['status_id']]);
-                var_dump($orderGhtk);
                 $orderNhanh = Order::where('label_GHTK', $data['label_id'])->update(['statusGHTK' => $data['status_id']]);
+                Log::info($orderGhtk);
+                Log::info($orderNhanh);
                 return response()->json(['success' => true]);
                 break;
             default:
                 return response()->json(['success' => false]);
                 break;
         }
-        die();
     }
 
     public function test()
