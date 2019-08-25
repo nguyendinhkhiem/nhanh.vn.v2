@@ -14,9 +14,6 @@ class RegisterWebHookController extends Controller
     {
         $result = $this->webhook_url();
 
-        var_dump($result);
-        die();
-
         $url = route('listen-webhook', ['able' => 'giaohangtietkiem.vn']);
         if ($url !== $result->data) {
             $delete = $this->curl("https://services.giaohangtietkiem.vn/services/webhook/del", ['url' => $result->data]);
@@ -25,13 +22,12 @@ class RegisterWebHookController extends Controller
         $data = ['url' => route('listen-webhook', ['able' => 'giaohangtietkiem.vn'])];
         $add  = $this->curl("https://services.giaohangtietkiem.vn/services/webhook/add", $data);
 
-        var_dump($add);
-        var_dump($add->success);
-        die();
-
         if ($add->success) {
             $resultAddWebHook = $this->webhook_url();
         }
+
+        var_dump($result);
+        die();
     }
 
     public function webhook_url()
