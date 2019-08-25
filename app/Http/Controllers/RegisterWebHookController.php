@@ -13,6 +13,9 @@ class RegisterWebHookController extends Controller
     {
         $result = $this->webhook_url();
 
+        var_dump($result);
+        die();
+
         $url = route('listen-webhook');
         if ($url !== $result->data) {
             $delete = $this->curl("https://services.giaohangtietkiem.vn/services/webhook/del", ['url' => $result->data]);
@@ -67,8 +70,6 @@ class RegisterWebHookController extends Controller
 
     public function listenOrderGhtk(Request $request)
     {
-    	echo "<pre>";
-    	var_dump($request->all());
-    	die();
+    	$data = $request->all();
     }
 }
