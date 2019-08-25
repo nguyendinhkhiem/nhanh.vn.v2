@@ -1,0 +1,260 @@
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+
+// Variables
+@import 'variables';
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+
+
+.page_search_orders {
+    #search_order {
+        width: 60%;
+        margin: 0 auto;
+        margin-top: 200px;
+        display: flex;
+        flex-flow: row wrap;
+
+        .choice_type_search {
+            width: 20%;
+            position: relative;
+
+            .type_current_order {
+                background-color: #fff;
+                border: 1px solid #e8e9eb;
+                margin-bottom: 0px;
+                height: 50px;
+                padding: 13px 10px 0px 20px;
+                display: flex;
+                justify-content: space-between;
+
+                .icon {
+                    padding-top: 10px;
+
+                    .icon-up {
+                        display: none;
+                    }
+
+                    .icon-down {
+                        display: block;
+                    }
+                }
+            }
+
+            .list {
+                background: #fff;
+                position: absolute;
+                top: 100%;
+                right: 0;
+                left: 0;
+                z-index: 5;
+                margin: 0;
+                padding: 0;
+                list-style: none;
+                background-color: #fff;
+                border: 1px solid #e8e9eb;
+                border-top: none;
+                width: 115%;
+                display: none;
+
+                li {
+                    margin: 0 8px;
+                    padding: 8px 15px;
+                    line-height: 1.3;
+                }
+            }
+        }
+
+        .choice_type_search.gt_active {
+            .type_current_order {
+                .icon {
+                    .icon-up {
+                        display: block;
+                    }
+
+                    .icon-down {
+                        display: none;
+                    }
+                }
+            }
+
+            .list {
+                display: block;
+            }
+        }
+
+        .input_search {
+            width: 65%;
+
+            #search_order_input {
+                height: 50px;
+                width: 100%;
+                background-color: #fff;
+                border: 1px solid #e8e9eb;
+                padding-left: 15px;
+                color: black;
+
+            }
+        }
+
+        .button_submit {
+            width: 15%;
+
+            input {
+                height: 50px;
+                width: 100%;
+                background: #38c172;
+                border: 1px solid transparent;
+                font-size: 18px;
+                color: #fff;
+                font-weight: bold;
+            }
+        }
+    }
+
+    .categoris_order {
+        .list {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+
+            .item {
+                margin-right: 25px;
+                padding: 7px;
+                border-radius: 5px;
+
+                a {
+                    text-decoration: none;
+                }
+            }
+
+            .Success {
+                background: #3490dc;
+
+                a {
+                    color: #fff;
+                }
+            }
+
+            .Shipping {
+                background: #4ac54a;
+
+                a {
+                    color: #fff;
+                }
+            }
+
+            .Transferring {
+                background: #fb9307;
+
+                a {
+                    color: #fff
+                }
+            }
+
+            .Completed {
+                background: #3490dc;
+
+                a {
+                    color: #fff;
+                }
+            }
+
+            .NeedTreatment {
+                background: #e24343;
+
+                a {
+                    color: #fff;
+                }
+            }
+        }
+    }
+
+    .response_search {
+        margin-top: 100px !important;
+        width: 95%;
+        margin: 0 auto;
+        background: #fff;
+    }
+}
+
+.list_order_nhanh {
+    width: 95%;
+    margin: 0 auto;
+}
+
+.create-ghtk {
+
+    .button-create,
+    .button-cancle {
+        width: 135px;
+        padding: 10px;
+        text-align: center;
+        background: #2a7cbf;
+        color: #fff;
+        border-radius: 5px;
+        margin-bottom: 20px;
+        margin-top: 20px;
+    }
+
+    .info-call-ghtk {
+        #info-call-ghtk {
+            width: 50%;
+            margin: 0 auto;
+            padding: 15px;
+            border: 1px solid;
+            margin-bottom: 20px;
+        }
+    }
+}
+
+
+.loading {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #7d7d7d80;
+    display: none;
+    z-index: 99;
+    position: fixed;
+
+    .lds-spinner {
+        position: absolute;
+        top: 30%;
+        left: 50%;
+        transform: translate(-50%, -20%);
+    }
+}
+
+.loading.active {
+    display: block !important;
+}
+
+#create-info {
+    width: 60%;
+    margin: 0 auto;
+}
+
+.menu {
+    .list {
+        list-style: none;
+        padding: 0;
+        margin-bottom: 30px;
+        display: flex;
+        justify-content: center;
+        align-content: center;
+
+        .item{
+            margin-right: 20px;
+            a{
+                font-size: 20px;
+                font-weight: 600;
+            }
+        }
+    }
+}
