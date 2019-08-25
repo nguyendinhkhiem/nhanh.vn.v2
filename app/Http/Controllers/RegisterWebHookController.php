@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 
 use App\Entities\Deliverys;
+use App\Entities\Order;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
