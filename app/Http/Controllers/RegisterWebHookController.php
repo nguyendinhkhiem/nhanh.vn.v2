@@ -12,7 +12,8 @@ class RegisterWebHookController extends Controller
     public function register()
     {
         $result = $this->webhook_url();
-
+        var_dump($result);
+        die();
         $url = route('listen-webhook');
         if ($url !== $result->data) {
             $delete = $this->curl("https://services.giaohangtietkiem.vn/services/webhook/del", ['url' => $result->data]);
