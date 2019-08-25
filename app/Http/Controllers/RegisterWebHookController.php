@@ -16,12 +16,12 @@ class RegisterWebHookController extends Controller
     {
         $result = $this->webhook_url();
 
-        $url = route('listen-webhook', ['able' => 'giaohangtietkiem.vn']);
+        $url = route('listen-webhook');
         if ($url !== $result->data) {
             $delete = $this->curl("https://services.giaohangtietkiem.vn/services/webhook/del", ['url' => $result->data]);
         }
 
-        $data = ['url' => route('listen-webhook', ['able' => 'giaohangtietkiem.vn'])];
+        $data = ['url' => route('listen-webhook')];
         $add  = $this->curl("https://services.giaohangtietkiem.vn/services/webhook/add", $data);
 
         if ($add->success) {
@@ -75,18 +75,11 @@ class RegisterWebHookController extends Controller
     {
         $data = $request->all();
         Log::info($data);
-        switch ($_GET['able']) {
-            case 'giaohangtietkiem.vn':
-                $orderGhtk  = Deliverys::where('label', $data['label_id'])->update(['status_id' => $data['status_id']]);
-                $orderNhanh = Order::where('label_GHTK', $data['label_id'])->update(['statusGHTK' => $data['status_id']]);
-                Log::info($orderGhtk);
-                Log::info($orderNhanh);
-                return response()->json(['success' => true]);
-                break;
-            default:
-                return response()->json(['success' => false]);
-                break;
-        }
+        $orderGhtk  = Deliverys::where('label', $data['label_id'])->update(['status_id' => $data['status_id']]);
+        $orderNhanh = Order::where('label_GHTK', $data['label_id'])->update(['statusGHTK' => $data['status_id']]);
+        Log::info($orderGhtk);
+        Log::info($orderNhanh);
+        return response()->json(['success' => true]);
     }
 
     public function test()
