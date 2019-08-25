@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Entities\Deliverys;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -21,8 +22,6 @@ class RegisterWebHookController extends Controller
 
         $data = ['url' => route('listen-webhook')];
         $add  = $this->curl("https://services.giaohangtietkiem.vn/services/webhook/add", $data);
-        var_dump($add);
-        die();
 
         if ($add->success) {
             $resultAddWebHook = $this->webhook_url();
@@ -71,5 +70,9 @@ class RegisterWebHookController extends Controller
     public function listenOrderGhtk(Request $request)
     {
     	$data = $request->all();
+
+    	$orderGhtk = Deliverys::where('label', $data->label_id)->update(['status_id' => $data->status_id]);
+
+    	$orderNhanh = Order::where('label_GHTK', $data->label_id)->update(['statusGHTK' => $data->status_id]);
     }
 }
