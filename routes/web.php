@@ -37,4 +37,5 @@ Route::get('/test-huy', 'OrderGiaoHangTietKiemControllers@huy');
 
 
 Route::get('/register-webhook', 'RegisterWebHookController@register');
+Route::get('/test-status', 'RegisterWebHookController@test');
 Route::get('/api/listen-webhook', 'RegisterWebHookController@listenOrderGhtk')->name('listen-webhook');

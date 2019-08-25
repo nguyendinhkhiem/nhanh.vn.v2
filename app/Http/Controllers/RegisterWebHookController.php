@@ -85,4 +85,26 @@ class RegisterWebHookController extends Controller
                 break;
         }
     }
+
+    public function test()
+    {
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+            CURLOPT_URL            => "https://services.giaohangtietkiem.vn/services/shipment/v2/S6923320.BO.MT4.D1.416911708",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_HTTP_VERSION   => CURL_HTTP_VERSION_1_1,
+            CURLOPT_HTTPHEADER     => array(
+                "Token: 463eE26342a6e99379779711218C0cb2783E7a5b",
+            ),
+        ));
+
+        $response = curl_exec($curl);
+        curl_close($curl);
+
+        var_dump(json_decode($response));
+        die();
+
+        echo 'Response: ' . $response;
+    }
 }
