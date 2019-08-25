@@ -5,6 +5,7 @@ use App\Entities\Deliverys;
 use App\Entities\Order;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 /**
  *
@@ -76,7 +77,7 @@ class RegisterWebHookController extends Controller
         Log::info($data);
         switch ($_GET['able']) {
             case 'giaohangtietkiem.vn':
-                $orderGhtk = Deliverys::where('label', $data['label_id'])->update(['status_id' => $data['status_id']]);
+                $orderGhtk  = Deliverys::where('label', $data['label_id'])->update(['status_id' => $data['status_id']]);
                 $orderNhanh = Order::where('label_GHTK', $data['label_id'])->update(['statusGHTK' => $data['status_id']]);
                 Log::info($orderGhtk);
                 Log::info($orderNhanh);
