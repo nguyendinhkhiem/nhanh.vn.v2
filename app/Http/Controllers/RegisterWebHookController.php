@@ -22,6 +22,7 @@ class RegisterWebHookController extends Controller
         $add  = $this->curl("https://services.giaohangtietkiem.vn/services/webhook/add", $data);
 
         if ($add->success) {
+        	var_dump('oke');
             $resultAddWebHook = $this->webhook_url();
 
             var_dump($resultAddWebHook);
