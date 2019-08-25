@@ -21,10 +21,6 @@ class RegisterWebHookController extends Controller
         $data = ['url' => route('listen-webhook')];
         $add  = $this->curl("https://services.giaohangtietkiem.vn/services/webhook/add", $data);
 
-        var_dump($add);
-        var_dump($add->success);
-        die();
-
         if ($add->success) {
             $resultAddWebHook = $this->webhook_url();
         }
@@ -71,6 +67,7 @@ class RegisterWebHookController extends Controller
 
     public function listenOrderGhtk(Request $request)
     {
-
+    	var_dump($request);
+    	die();
     }
 }
