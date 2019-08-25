@@ -68,7 +68,7 @@ class RegisterWebHookController extends Controller
     public function listenOrderGhtk(Request $request)
     {
     	echo "<pre>";
-    	var_dump($request);
+    	var_dump($request->all());
     	die();
     }
 }
