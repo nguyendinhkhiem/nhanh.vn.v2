@@ -12,8 +12,7 @@ class RegisterWebHookController extends Controller
     public function register()
     {
         $result = $this->webhook_url();
-        var_dump($result);
-        die();
+
         $url = route('listen-webhook');
         if ($url !== $result->data) {
             $delete = $this->curl("https://services.giaohangtietkiem.vn/services/webhook/del", ['url' => $result->data]);
@@ -22,12 +21,12 @@ class RegisterWebHookController extends Controller
         $data = ['url' => route('listen-webhook')];
         $add  = $this->curl("https://services.giaohangtietkiem.vn/services/webhook/add", $data);
 
-        if ($add->success) {
-        	var_dump('oke');
-            $resultAddWebHook = $this->webhook_url();
+        var_dump($add);
+        var_dump($add->success);
+        die();
 
-            var_dump($resultAddWebHook);
-            die();
+        if ($add->success) {
+            $resultAddWebHook = $this->webhook_url();
         }
     }
 
