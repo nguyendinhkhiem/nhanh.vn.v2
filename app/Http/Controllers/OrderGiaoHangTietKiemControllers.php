@@ -112,6 +112,8 @@ class OrderGiaoHangTietKiemControllers extends Controller
         }
 
         if ($responseData) {
+            var_dump($responseData);
+            die();
             return json_encode($responseData);
         }
     }

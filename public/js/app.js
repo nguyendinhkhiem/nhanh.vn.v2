@@ -37004,8 +37004,7 @@ $(document).ready(function () {
 
         if (response.status == 200) {
           $('.loading').removeClass('active');
-          alert('Bạn đã đăng ký thành công lên Giao Hàng Tiết Kiệm');
-          window.location.href = window.location.href;
+          alert('Bạn đã đăng ký thành công lên Giao Hàng Tiết Kiệm'); // window.location.href = window.location.href;
         }
       })["catch"](function (error) {
         // handle error
