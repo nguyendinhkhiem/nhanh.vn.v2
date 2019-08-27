@@ -36960,6 +36960,8 @@ $(document).ready(function () {
       });
       array_id_nhanh = list_array_new;
     }
+
+    console.log('array_id_nhanh ', array_id_nhanh);
   });
 
   function checkAllPageList() {
