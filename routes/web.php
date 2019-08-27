@@ -49,6 +49,8 @@ Route::post('/api/sort-order/transferring', 'SortOrderController@sortListOrderTr
 Route::post('/api/sort-order/completed', 'SortOrderController@sortListOrderCompleted');
 Route::post('/api/sort-order/need-treatment', 'SortOrderController@sortListOrderNeedTreatment');
 
+//sortOrdersByKey
+Route::post('/api/sort-order/keyword', 'SortOrderController@sortByKeyList');
 
 //singleOrder
 Route::get('/order/{id}', 'OrderController@singleOrder')->name('single-order');

@@ -10,6 +10,18 @@ use Illuminate\Http\Request;
  */
 class SortOrderController extends Controller
 {
+    public function sortByKeyList(Request $request)
+    {
+        $data = $request->all();
+
+        $querry = Order::where($data['params']['type'], 'like', "%{$data['params']['value']}%");
+
+        $listOrders = $querry->get();
+        $count = $querry->get()->count();
+
+        return response()->json(['success' => true, 'listOrders' => $listOrders, 'count' => $count]);
+    }
+
     public function sortListOrder(Request $request)
     {
         $data = $request->all();

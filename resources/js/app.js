@@ -212,32 +212,36 @@ $(document).ready(function() {
         }
     });
 
-    $('#choice_all').click(function() {
-        array_id_nhanh = [];
-        var $listItemOrder = $('.list_order_search .item');
-        if ($(this).is(":checked") == true) {
-            if ($listItemOrder.length > 0 && $listItemOrder) {
-                for (var i = 0; i < $listItemOrder.length; i++) {
-                    var $item = jQuery($listItemOrder[i]);
+    function checkAllPageList() {
+        $('#choice_all').click(function() {
+            array_id_nhanh = [];
+            var $listItemOrder = $('.list_order_search .item');
+            if ($(this).is(":checked") == true) {
+                if ($listItemOrder.length > 0 && $listItemOrder) {
+                    for (var i = 0; i < $listItemOrder.length; i++) {
+                        var $item = jQuery($listItemOrder[i]);
 
-                    if ($item.find('.item-order-nhanh').attr('data-status') != 'SoldOut') {
-                        var id_nhanh = $item.find('.item-order-nhanh').attr('data-idnhanh');
-                        $item.find('.item-order-nhanh').prop("checked", true);
+                        if ($item.find('.item-order-nhanh').attr('data-status') != 'SoldOut') {
+                            var id_nhanh = $item.find('.item-order-nhanh').attr('data-idnhanh');
+                            $item.find('.item-order-nhanh').prop("checked", true);
 
-                        array_id_nhanh.push(id_nhanh)
+                            array_id_nhanh.push(id_nhanh)
+                        }
+                    }
+                }
+            } else {
+                if ($listItemOrder.length > 0 && $listItemOrder) {
+                    for (var i = 0; i < $listItemOrder.length; i++) {
+                        var $item = jQuery($listItemOrder[i]);
+
+                        $item.find('.item-order-nhanh').prop("checked", false);
                     }
                 }
             }
-        } else {
-            if ($listItemOrder.length > 0 && $listItemOrder) {
-                for (var i = 0; i < $listItemOrder.length; i++) {
-                    var $item = jQuery($listItemOrder[i]);
+        })
+    }
 
-                    $item.find('.item-order-nhanh').prop("checked", false);
-                }
-            }
-        }
-    })
+    checkAllPageList();
 
     $('#info-call-ghtk').submit(function(e) {
         e.preventDefault();
@@ -377,7 +381,7 @@ $(document).ready(function() {
                             for (var i = 0; i < response.data.listOrders.length; i++) {
                                 var order = response.data.listOrders[i];
 
-                                htmlItem += '<tr>';
+                                htmlItem += '<tr class="item">';
                                 htmlItem += '<th scope="row"><input class="item-order-nhanh" type="checkbox" name="order_id_nhanh" data-idNhanh="' + order.id_nhanhvn + '" data-status="' + order.statusCode + '"></th>';
                                 htmlItem += '<td><a href="/order/' + order.id + '">' + order.id_nhanhvn + '</a></td>';
                                 htmlItem += '<td>' + order.createdDateTime + '</td>';
@@ -417,7 +421,8 @@ $(document).ready(function() {
                                 $('.pagination').remove()
                             }
                         }
-                        $('.loading').removeClass('active')
+                        $('.loading').removeClass('active');
+                        checkAllPageList();
                     }
                 })
                 .catch(function(error) {
@@ -886,6 +891,135 @@ $(document).ready(function() {
             }
 
             $('.loading').removeClass('active')
+        }
+    })
+    
+
+    //search order new 27/8
+    $('#search_order_list_info').submit(function(e) {
+        e.preventDefault();
+
+        $('.loading').addClass('active')
+        var type = $(this).find('#type_serch_input').val();
+        var input = $(this).find('#search_order_input').val();
+
+        window.axios.post('/api/sort-order/keyword', {
+                params: {
+                    type: type,
+                    value: input
+                }
+            })
+            .then(function(response) {
+                if (response.data.success == true) {
+                    console.log('response ', response);
+                    if (response.data.listOrders && response.data.listOrders.length > 0) {
+                        var htmlItem = '';
+
+                        for (var i = 0; i < response.data.listOrders.length; i++) {
+                            var order = response.data.listOrders[i];
+
+                            htmlItem += '<tr class="item">';
+                            htmlItem += '<th scope="row"><input class="item-order-nhanh" type="checkbox" name="order_id_nhanh" data-idNhanh="' + order.id_nhanhvn + '" data-status="' + order.statusCode + '"></th>';
+                            htmlItem += '<td><a href="/order/' + order.id + '">' + order.id_nhanhvn + '</a></td>';
+                            htmlItem += '<td>' + order.label_GHTK + '</td>';
+                            htmlItem += '<td>' + order.customerName + '</td>';
+                            htmlItem += '<td>' + order.customerMobile + '</td>';
+                            try {
+                                if (order.products) {
+                                    var productJson = JSON.parse(order.products);
+                                    if (productJson && productJson.length > 0) {
+                                        var nameProducts = '';
+                                        for (var iPrd = 0; iPrd < productJson.length; iPrd++) {
+                                            var product = productJson[iPrd];
+                                            if (iPrd > 0) {
+                                                nameProducts += '<br> ' + product.name;
+                                            } else {
+                                                nameProducts += product.name;
+                                            }
+                                        }
+                                        htmlItem += '<td>' + nameProducts + '</td>';
+                                    } else {
+                                        htmlItem += '<td>Lỗi hiển thị</td>';
+                                    }
+                                }
+                            } catch (e) {
+                                htmlItem += '<td>Lỗi hiển thị</td>';
+                            }
+                            htmlItem += '<td>' + order.calcTotalMoney + '</td>';
+                            htmlItem += '<td>' + order.statusName + '</td>';
+                            if (order.label_GHTK) {
+                                htmlItem += '<td>' + order.label_GHTK + '</td>';
+                            } else {
+                                htmlItem += '<td>Chưa lên GHTK</td>';
+                            }
+                            htmlItem += '</tr>';
+
+                            $('#search_list_order_clone').html(htmlItem)
+                            $('.pagination').remove()
+                        }
+                    }else{
+                        alert('Không tìm thấy kết quả!');
+                    }
+                    $('.loading').removeClass('active');
+                    checkAllPageList();
+                }
+            })
+            .catch(function(error) {
+                // handle error
+                console.log(error);
+            })
+            .finally(function() {
+                // always executed
+            });
+    });
+
+    $('#info-call-ghtk-new').submit(function(e){
+        e.preventDefault();
+        $('.loading').addClass('active');
+
+        if (array_id_nhanh && array_id_nhanh.length > 0) {
+            var info_received = $('#info-received option:selected').attr('data-id')
+            var calcShip = 1;
+
+            window.axios.post('/create-order-ghtk', {
+                    params: {
+                        data_id: array_id_nhanh,
+                        info_received: info_received,
+                        calcShip: calcShip
+                    }
+                })
+                .then(function(response) {
+                    // console.log('response ', response.data)
+                    if (response.status == 200) {
+                        if (response.data.length > 0 && response.data) {
+                            var htmlRespon = '';
+                            for (var i = 0; i < response.data.length; i++) {
+                                var respon = response.data[i];
+
+                                htmlRespon += '<div class="item">'
+                                htmlRespon += '<p><span>'+ i +':</span>  '+ respon.message +'</p>';
+                                if (respon.error) {
+                                    htmlRespon += '<p>'+ respon.error.ghtk_label +'</p>';
+                                }
+                                htmlRespon += '</div>';
+                            }
+
+                            $('#ketqua_create_ghtk').html(htmlRespon);
+                            $('#exampleModalCenterListOrder').modal('show')
+                        }
+                        $('.loading').removeClass('active')
+                    }
+                })
+                .catch(function(error) {
+                    // handle error
+                    console.log(error);
+                })
+                .finally(function() {
+                    // always executed
+                });
+
+        } else {
+            alert('Bạn chưa chọn Order')
         }
     })
 })

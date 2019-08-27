@@ -46,10 +46,8 @@ class OrderController extends Controller
     }
 
     function list() {
-        $orders = Order::orderByRaw('FIELD(statusCode, "Canceled","SoldOut","CustomerConfirming","Confirmed", "Returned","Returning", "Shipping", "Success")')
-            ->where('label_GHTK', '=', null)
-            ->latest()
-            ->paginate(12);
+        $orders = Order::latest()
+            ->paginate(20);
 
         $info = Information::get();
 
