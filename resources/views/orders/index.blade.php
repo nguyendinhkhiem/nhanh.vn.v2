@@ -5,9 +5,9 @@
 		<form id="search_order">
 			@csrf
 			<div class="choice_type_search">
-				<input type="hidden" id="type_serch_input" name="type_serch_input" value="customerMobile">
+				<input type="hidden" id="type_serch_input" name="type_serch_input" value="handoverId">
 				<p class="type_current_order">
-					<span class="name">SĐT khách hàng</span>
+					<span class="name">ID Biên bản bàn giao</span>
 					<span class="icon">
 						<svg class="icon-down" width="8" height="4" viewBox="0 0 8 4" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd" clip-rule="evenodd" d="M7.86983 0.117157C8.04339 0.273367 8.04339 0.526633 7.86983 0.682843L4.31427 3.88284C4.1407 4.03905 3.8593 4.03905 3.68573 3.88284L0.130175 0.682843C-0.0433913 0.526633 -0.0433912 0.273367 0.130175 0.117157C0.303741 -0.0390527 0.585148 -0.0390528 0.758714 0.117157L4 3.03431L7.24129 0.117157C7.41485 -0.0390525 7.69626 -0.0390524 7.86983 0.117157Z" fill="#4F4F4F"/>
@@ -31,7 +31,7 @@
 				</ul>
 			</div>
 			<div class="input_search">
-				<input type="number" value="0985830008" name="search_order_input" id="search_order_input" placeholder="Nhập thông tin">
+				<input type="number" value="" name="search_order_input" id="search_order_input" placeholder="Nhập thông tin">
 			</div>
 			<div class="button_submit">
 				<input type="submit" name="submit_search_orders">

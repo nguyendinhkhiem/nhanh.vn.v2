@@ -39,3 +39,16 @@ Route::get('/test-huy', 'OrderGiaoHangTietKiemControllers@huy');
 Route::get('/register-webhook', 'RegisterWebHookController@register');
 Route::get('/test-status', 'RegisterWebHookController@test');
 Route::post('/api/listen-webhook', 'RegisterWebHookController@listenOrderGhtk')->name('listen-webhook');
+
+
+//sortOrders
+Route::post('/api/sort-order/list', 'SortOrderController@sortListOrder');
+Route::post('/api/sort-order/success', 'SortOrderController@sortListOrderSuccess');
+Route::post('/api/sort-order/shipping', 'SortOrderController@sortListOrderShipping');
+Route::post('/api/sort-order/transferring', 'SortOrderController@sortListOrderTransferring');
+Route::post('/api/sort-order/completed', 'SortOrderController@sortListOrderCompleted');
+Route::post('/api/sort-order/need-treatment', 'SortOrderController@sortListOrderNeedTreatment');
+
+
+//singleOrder
+Route::get('/order/{id}', 'OrderController@singleOrder')->name('single-order');

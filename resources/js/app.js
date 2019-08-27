@@ -258,7 +258,7 @@ $(document).ready(function() {
                     if (response.status == 200) {
                         $('.loading').removeClass('active')
                         alert('Bạn đã đăng ký thành công lên Giao Hàng Tiết Kiệm');
-                        // window.location.href = window.location.href;
+                        window.location.href = window.location.href;
                     }
                 })
                 .catch(function(error) {
@@ -353,6 +353,539 @@ $(document).ready(function() {
                     $item.find('.item-ghtk-nhanh').prop("checked", false);
                 }
             }
+        }
+    })
+
+    $('#search_order_list').submit(function(e) {
+        e.preventDefault();
+        $('.loading').addClass('active')
+        var type = $(this).find('#type_serch_input').val();
+        var input = $(this).find('#search_order_input').val();
+
+        if (input.length > 0) {
+            window.axios.post('/api/sort-order/list', {
+                    params: {
+                        type: type,
+                        value: input
+                    }
+                })
+                .then(function(response) {
+                    if (response.data.success == true) {
+                        if (response.data.listOrders && response.data.listOrders.length > 0) {
+                            var htmlItem = '';
+
+                            for (var i = 0; i < response.data.listOrders.length; i++) {
+                                var order = response.data.listOrders[i];
+
+                                htmlItem += '<tr>';
+                                htmlItem += '<th scope="row"><input class="item-order-nhanh" type="checkbox" name="order_id_nhanh" data-idNhanh="' + order.id_nhanhvn + '" data-status="' + order.statusCode + '"></th>';
+                                htmlItem += '<td><a href="/order/' + order.id + '">' + order.id_nhanhvn + '</a></td>';
+                                htmlItem += '<td>' + order.createdDateTime + '</td>';
+                                htmlItem += '<td>' + order.customerName + '</td>';
+                                htmlItem += '<td>' + order.customerMobile + '</td>';
+                                htmlItem += '<td>' + order.statusName + '</td>';
+                                try {
+                                    if (order.products) {
+                                        var productJson = JSON.parse(order.products);
+                                        if (productJson && productJson.length > 0) {
+                                            var nameProducts = '';
+                                            for (var iPrd = 0; iPrd < productJson.length; iPrd++) {
+                                                var product = productJson[iPrd];
+                                                if (iPrd > 0) {
+                                                    nameProducts += '<br> ' + product.name;
+                                                } else {
+                                                    nameProducts += product.name;
+                                                }
+                                            }
+                                            htmlItem += '<td>' + nameProducts + '</td>';
+                                        } else {
+                                            htmlItem += '<td>Lỗi hiển thị</td>';
+                                        }
+                                    }
+                                } catch (e) {
+                                    htmlItem += '<td>Lỗi hiển thị</td>';
+                                }
+                                htmlItem += '<td>' + order.calcTotalMoney + '</td>';
+                                if (order.label_GHTK) {
+                                    htmlItem += '<td>' + order.label_GHTK + '</td>';
+                                } else {
+                                    htmlItem += '<td>Chưa lên GHTK</td>';
+                                }
+                                htmlItem += '</tr>';
+
+                                $('#search_list_order_clone').html(htmlItem)
+                                $('.pagination').remove()
+                            }
+                        }
+                        $('.loading').removeClass('active')
+                    }
+                })
+                .catch(function(error) {
+                    // handle error
+                    console.log(error);
+                })
+                .finally(function() {
+                    // always executed
+                });
+        } else {
+            if (type == 'handoverId') {
+                alert('Bạn hãy nhập ID Biên bản bàn giao')
+            }
+
+            if (type == 'id') {
+                alert('Bạn hãy nhập ID Đơn Hàng')
+            }
+
+            if (type == 'customerMobile') {
+                alert('Bạn hãy nhập Số Điện Thoại Khách Hàng')
+            }
+
+            $('.loading').removeClass('active')
+        }
+    })
+
+    //success
+    $('#search_order_list_success').submit(function(e) {
+        e.preventDefault();
+        $('.loading').addClass('active')
+        var type = $(this).find('#type_serch_input').val();
+        var input = $(this).find('#search_order_input').val();
+
+        if (input.length > 0) {
+            window.axios.post('/api/sort-order/list', {
+                    params: {
+                        type: type,
+                        value: input
+                    }
+                })
+                .then(function(response) {
+                    if (response.data.success == true) {
+                        if (response.data.listOrders && response.data.listOrders.length > 0) {
+                            var htmlItem = '';
+
+                            for (var i = 0; i < response.data.listOrders.length; i++) {
+                                var order = response.data.listOrders[i];
+
+                                htmlItem += '<tr>';
+                                htmlItem += '<th scope="row"><input class="item-order-nhanh" type="checkbox" name="order_id_nhanh" data-idNhanh="' + order.id_nhanhvn + '" data-status="' + order.statusCode + '"></th>';
+                                htmlItem += '<td><a href="/order/' + order.id + '">' + order.id_nhanhvn + '</a></td>';
+                                htmlItem += '<td>' + order.createdDateTime + '</td>';
+                                htmlItem += '<td>' + order.customerName + '</td>';
+                                htmlItem += '<td>' + order.customerMobile + '</td>';
+                                htmlItem += '<td>' + order.statusName + '</td>';
+                                try {
+                                    if (order.products) {
+                                        var productJson = JSON.parse(order.products);
+                                        if (productJson && productJson.length > 0) {
+                                            var nameProducts = '';
+                                            for (var iPrd = 0; iPrd < productJson.length; iPrd++) {
+                                                var product = productJson[iPrd];
+                                                if (iPrd > 0) {
+                                                    nameProducts += '<br> ' + product.name;
+                                                } else {
+                                                    nameProducts += product.name;
+                                                }
+                                            }
+                                            htmlItem += '<td>' + nameProducts + '</td>';
+                                        } else {
+                                            htmlItem += '<td>Lỗi hiển thị</td>';
+                                        }
+                                    }
+                                } catch (e) {
+                                    htmlItem += '<td>Lỗi hiển thị</td>';
+                                }
+                                htmlItem += '<td>' + order.calcTotalMoney + '</td>';
+                                if (order.label_GHTK) {
+                                    htmlItem += '<td>' + order.label_GHTK + '</td>';
+                                } else {
+                                    htmlItem += '<td>Chưa lên GHTK</td>';
+                                }
+                                htmlItem += '</tr>';
+
+                                $('#search_list_order_success_clone').html(htmlItem)
+                                $('.pagination').remove()
+                            }
+                        }
+                        $('.loading').removeClass('active')
+                    }
+                })
+                .catch(function(error) {
+                    // handle error
+                    console.log(error);
+                })
+                .finally(function() {
+                    // always executed
+                });
+        } else {
+            if (type == 'handoverId') {
+                alert('Bạn hãy nhập ID Biên bản bàn giao')
+            }
+
+            if (type == 'id') {
+                alert('Bạn hãy nhập ID Đơn Hàng')
+            }
+
+            if (type == 'customerMobile') {
+                alert('Bạn hãy nhập Số Điện Thoại Khách Hàng')
+            }
+
+            $('.loading').removeClass('active')
+        }
+    })
+
+    //shipping
+    $('#search_order_list_shipping').submit(function(e) {
+        e.preventDefault();
+        $('.loading').addClass('active')
+        var type = $(this).find('#type_serch_input').val();
+        var input = $(this).find('#search_order_input').val();
+
+        if (input.length > 0) {
+            window.axios.post('/api/sort-order/shipping', {
+                    params: {
+                        type: type,
+                        value: input
+                    }
+                })
+                .then(function(response) {
+                    if (response.data.success == true) {
+                        if (response.data.listOrders && response.data.listOrders.length > 0) {
+                            var htmlItem = '';
+
+                            for (var i = 0; i < response.data.listOrders.length; i++) {
+                                var order = response.data.listOrders[i];
+
+                                htmlItem += '<tr>';
+                                htmlItem += '<th scope="row"><input class="item-order-nhanh" type="checkbox" name="order_id_nhanh" data-idNhanh="' + order.id_nhanhvn + '" data-status="' + order.statusCode + '"></th>';
+                                htmlItem += '<td><a href="/order/' + order.id + '">' + order.id_nhanhvn + '</a></td>';
+                                htmlItem += '<td>' + order.createdDateTime + '</td>';
+                                htmlItem += '<td>' + order.customerName + '</td>';
+                                htmlItem += '<td>' + order.customerMobile + '</td>';
+                                htmlItem += '<td>' + order.statusName + '</td>';
+                                try {
+                                    if (order.products) {
+                                        var productJson = JSON.parse(order.products);
+                                        if (productJson && productJson.length > 0) {
+                                            var nameProducts = '';
+                                            for (var iPrd = 0; iPrd < productJson.length; iPrd++) {
+                                                var product = productJson[iPrd];
+                                                if (iPrd > 0) {
+                                                    nameProducts += '<br> ' + product.name;
+                                                } else {
+                                                    nameProducts += product.name;
+                                                }
+                                            }
+                                            htmlItem += '<td>' + nameProducts + '</td>';
+                                        } else {
+                                            htmlItem += '<td>Lỗi hiển thị</td>';
+                                        }
+                                    }
+                                } catch (e) {
+                                    htmlItem += '<td>Lỗi hiển thị</td>';
+                                }
+                                htmlItem += '<td>' + order.calcTotalMoney + '</td>';
+                                if (order.label_GHTK) {
+                                    htmlItem += '<td>' + order.label_GHTK + '</td>';
+                                } else {
+                                    htmlItem += '<td>Chưa lên GHTK</td>';
+                                }
+                                htmlItem += '</tr>';
+
+                                $('#search_list_order_shipping_clone').html(htmlItem)
+                                $('.pagination').remove()
+                            }
+                        }
+                        $('.loading').removeClass('active')
+                    }
+                })
+                .catch(function(error) {
+                    // handle error
+                    console.log(error);
+                })
+                .finally(function() {
+                    // always executed
+                });
+        } else {
+            if (type == 'handoverId') {
+                alert('Bạn hãy nhập ID Biên bản bàn giao')
+            }
+
+            if (type == 'id') {
+                alert('Bạn hãy nhập ID Đơn Hàng')
+            }
+
+            if (type == 'customerMobile') {
+                alert('Bạn hãy nhập Số Điện Thoại Khách Hàng')
+            }
+
+            $('.loading').removeClass('active')
+        }
+    })
+
+    //transferring
+    $('#search_order_list_transferring').submit(function(e) {
+        e.preventDefault();
+        $('.loading').addClass('active')
+        var type = $(this).find('#type_serch_input').val();
+        var input = $(this).find('#search_order_input').val();
+
+        if (input.length > 0) {
+            window.axios.post('/api/sort-order/transferring', {
+                    params: {
+                        type: type,
+                        value: input
+                    }
+                })
+                .then(function(response) {
+                    if (response.data.success == true) {
+                        if (response.data.listOrders && response.data.listOrders.length > 0) {
+                            var htmlItem = '';
+
+                            for (var i = 0; i < response.data.listOrders.length; i++) {
+                                var order = response.data.listOrders[i];
+
+                                htmlItem += '<tr>';
+                                htmlItem += '<th scope="row"><input class="item-order-nhanh" type="checkbox" name="order_id_nhanh" data-idNhanh="' + order.id_nhanhvn + '" data-status="' + order.statusCode + '"></th>';
+                                htmlItem += '<td><a href="/order/' + order.id + '">' + order.id_nhanhvn + '</a></td>';
+                                htmlItem += '<td>' + order.createdDateTime + '</td>';
+                                htmlItem += '<td>' + order.customerName + '</td>';
+                                htmlItem += '<td>' + order.customerMobile + '</td>';
+                                htmlItem += '<td>' + order.statusName + '</td>';
+                                try {
+                                    if (order.products) {
+                                        var productJson = JSON.parse(order.products);
+                                        if (productJson && productJson.length > 0) {
+                                            var nameProducts = '';
+                                            for (var iPrd = 0; iPrd < productJson.length; iPrd++) {
+                                                var product = productJson[iPrd];
+                                                if (iPrd > 0) {
+                                                    nameProducts += '<br> ' + product.name;
+                                                } else {
+                                                    nameProducts += product.name;
+                                                }
+                                            }
+                                            htmlItem += '<td>' + nameProducts + '</td>';
+                                        } else {
+                                            htmlItem += '<td>Lỗi hiển thị</td>';
+                                        }
+                                    }
+                                } catch (e) {
+                                    htmlItem += '<td>Lỗi hiển thị</td>';
+                                }
+                                htmlItem += '<td>' + order.calcTotalMoney + '</td>';
+                                if (order.label_GHTK) {
+                                    htmlItem += '<td>' + order.label_GHTK + '</td>';
+                                } else {
+                                    htmlItem += '<td>Chưa lên GHTK</td>';
+                                }
+                                htmlItem += '</tr>';
+
+                                $('#search_list_order_transferring_clone').html(htmlItem)
+                                $('.pagination').remove()
+                            }
+                        }
+                        $('.loading').removeClass('active')
+                    }
+                })
+                .catch(function(error) {
+                    // handle error
+                    console.log(error);
+                })
+                .finally(function() {
+                    // always executed
+                });
+        } else {
+            if (type == 'handoverId') {
+                alert('Bạn hãy nhập ID Biên bản bàn giao')
+            }
+
+            if (type == 'id') {
+                alert('Bạn hãy nhập ID Đơn Hàng')
+            }
+
+            if (type == 'customerMobile') {
+                alert('Bạn hãy nhập Số Điện Thoại Khách Hàng')
+            }
+
+            $('.loading').removeClass('active')
+        }
+    })
+
+    //completed
+    $('#search_order_list_completed').submit(function(e) {
+        e.preventDefault();
+        $('.loading').addClass('active')
+        var type = $(this).find('#type_serch_input').val();
+        var input = $(this).find('#search_order_input').val();
+
+        if (input.length > 0) {
+            window.axios.post('/api/sort-order/completed', {
+                    params: {
+                        type: type,
+                        value: input
+                    }
+                })
+                .then(function(response) {
+                    if (response.data.success == true) {
+                        if (response.data.listOrders && response.data.listOrders.length > 0) {
+                            var htmlItem = '';
+
+                            for (var i = 0; i < response.data.listOrders.length; i++) {
+                                var order = response.data.listOrders[i];
+
+                                htmlItem += '<tr>';
+                                htmlItem += '<th scope="row"><input class="item-order-nhanh" type="checkbox" name="order_id_nhanh" data-idNhanh="' + order.id_nhanhvn + '" data-status="' + order.statusCode + '"></th>';
+                                htmlItem += '<td><a href="/order/' + order.id + '">' + order.id_nhanhvn + '</a></td>';
+                                htmlItem += '<td>' + order.createdDateTime + '</td>';
+                                htmlItem += '<td>' + order.customerName + '</td>';
+                                htmlItem += '<td>' + order.customerMobile + '</td>';
+                                htmlItem += '<td>' + order.statusName + '</td>';
+                                try {
+                                    if (order.products) {
+                                        var productJson = JSON.parse(order.products);
+                                        if (productJson && productJson.length > 0) {
+                                            var nameProducts = '';
+                                            for (var iPrd = 0; iPrd < productJson.length; iPrd++) {
+                                                var product = productJson[iPrd];
+                                                if (iPrd > 0) {
+                                                    nameProducts += '<br> ' + product.name;
+                                                } else {
+                                                    nameProducts += product.name;
+                                                }
+                                            }
+                                            htmlItem += '<td>' + nameProducts + '</td>';
+                                        } else {
+                                            htmlItem += '<td>Lỗi hiển thị</td>';
+                                        }
+                                    }
+                                } catch (e) {
+                                    htmlItem += '<td>Lỗi hiển thị</td>';
+                                }
+                                htmlItem += '<td>' + order.calcTotalMoney + '</td>';
+                                if (order.label_GHTK) {
+                                    htmlItem += '<td>' + order.label_GHTK + '</td>';
+                                } else {
+                                    htmlItem += '<td>Chưa lên GHTK</td>';
+                                }
+                                htmlItem += '</tr>';
+
+                                $('#search_list_order_compaleted_clone').html(htmlItem)
+                                $('.pagination').remove()
+                            }
+                        }
+                        $('.loading').removeClass('active')
+                    }
+                })
+                .catch(function(error) {
+                    // handle error
+                    console.log(error);
+                })
+                .finally(function() {
+                    // always executed
+                });
+        } else {
+            if (type == 'handoverId') {
+                alert('Bạn hãy nhập ID Biên bản bàn giao')
+            }
+
+            if (type == 'id') {
+                alert('Bạn hãy nhập ID Đơn Hàng')
+            }
+
+            if (type == 'customerMobile') {
+                alert('Bạn hãy nhập Số Điện Thoại Khách Hàng')
+            }
+
+            $('.loading').removeClass('active')
+        }
+    })
+
+    //need_treatment
+    $('#search_order_list_need_treatment').submit(function(e) {
+        e.preventDefault();
+        $('.loading').addClass('active')
+        var type = $(this).find('#type_serch_input').val();
+        var input = $(this).find('#search_order_input').val();
+
+        if (input.length > 0) {
+            window.axios.post('/api/sort-order/need-treatment', {
+                    params: {
+                        type: type,
+                        value: input
+                    }
+                })
+                .then(function(response) {
+                    if (response.data.success == true) {
+                        if (response.data.listOrders && response.data.listOrders.length > 0) {
+                            var htmlItem = '';
+
+                            for (var i = 0; i < response.data.listOrders.length; i++) {
+                                var order = response.data.listOrders[i];
+
+                                htmlItem += '<tr>';
+                                htmlItem += '<th scope="row"><input class="item-order-nhanh" type="checkbox" name="order_id_nhanh" data-idNhanh="' + order.id_nhanhvn + '" data-status="' + order.statusCode + '"></th>';
+                                htmlItem += '<td><a href="/order/' + order.id + '">' + order.id_nhanhvn + '</a></td>';
+                                htmlItem += '<td>' + order.createdDateTime + '</td>';
+                                htmlItem += '<td>' + order.customerName + '</td>';
+                                htmlItem += '<td>' + order.customerMobile + '</td>';
+                                htmlItem += '<td>' + order.statusName + '</td>';
+                                try {
+                                    if (order.products) {
+                                        var productJson = JSON.parse(order.products);
+                                        if (productJson && productJson.length > 0) {
+                                            var nameProducts = '';
+                                            for (var iPrd = 0; iPrd < productJson.length; iPrd++) {
+                                                var product = productJson[iPrd];
+                                                if (iPrd > 0) {
+                                                    nameProducts += '<br> ' + product.name;
+                                                } else {
+                                                    nameProducts += product.name;
+                                                }
+                                            }
+                                            htmlItem += '<td>' + nameProducts + '</td>';
+                                        } else {
+                                            htmlItem += '<td>Lỗi hiển thị</td>';
+                                        }
+                                    }
+                                } catch (e) {
+                                    htmlItem += '<td>Lỗi hiển thị</td>';
+                                }
+                                htmlItem += '<td>' + order.calcTotalMoney + '</td>';
+                                if (order.label_GHTK) {
+                                    htmlItem += '<td>' + order.label_GHTK + '</td>';
+                                } else {
+                                    htmlItem += '<td>Chưa lên GHTK</td>';
+                                }
+                                htmlItem += '</tr>';
+
+                                $('#search_list_order_need_treatment_clone').html(htmlItem)
+                                $('.pagination').remove()
+                            }
+                        }
+                        $('.loading').removeClass('active')
+                    }
+                })
+                .catch(function(error) {
+                    // handle error
+                    console.log(error);
+                })
+                .finally(function() {
+                    // always executed
+                });
+        } else {
+            if (type == 'handoverId') {
+                alert('Bạn hãy nhập ID Biên bản bàn giao')
+            }
+
+            if (type == 'id') {
+                alert('Bạn hãy nhập ID Đơn Hàng')
+            }
+
+            if (type == 'customerMobile') {
+                alert('Bạn hãy nhập Số Điện Thoại Khách Hàng')
+            }
+
+            $('.loading').removeClass('active')
         }
     })
 })

@@ -10877,3 +10877,176 @@ a.text-dark:focus {
   font-weight: 600;
 }
 
+#search_order_list,
+#search_order_list_success,
+#search_order_list_shipping,
+#search_order_list_transferring,
+#search_order_list_completed,
+#search_order_list_need_treatment {
+  width: 60%;
+  margin: 0 auto;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  display: flex;
+  flex-flow: row wrap;
+}
+
+#search_order_list .choice_type_search,
+#search_order_list_success .choice_type_search,
+#search_order_list_shipping .choice_type_search,
+#search_order_list_transferring .choice_type_search,
+#search_order_list_completed .choice_type_search,
+#search_order_list_need_treatment .choice_type_search {
+  width: 20%;
+  position: relative;
+}
+
+#search_order_list .choice_type_search .type_current_order,
+#search_order_list_success .choice_type_search .type_current_order,
+#search_order_list_shipping .choice_type_search .type_current_order,
+#search_order_list_transferring .choice_type_search .type_current_order,
+#search_order_list_completed .choice_type_search .type_current_order,
+#search_order_list_need_treatment .choice_type_search .type_current_order {
+  background-color: #fff;
+  border: 1px solid #e8e9eb;
+  margin-bottom: 0px;
+  height: 50px;
+  padding: 13px 10px 0px 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+#search_order_list .choice_type_search .type_current_order .icon,
+#search_order_list_success .choice_type_search .type_current_order .icon,
+#search_order_list_shipping .choice_type_search .type_current_order .icon,
+#search_order_list_transferring .choice_type_search .type_current_order .icon,
+#search_order_list_completed .choice_type_search .type_current_order .icon,
+#search_order_list_need_treatment .choice_type_search .type_current_order .icon {
+  padding-top: 10px;
+}
+
+#search_order_list .choice_type_search .type_current_order .icon .icon-up,
+#search_order_list_success .choice_type_search .type_current_order .icon .icon-up,
+#search_order_list_shipping .choice_type_search .type_current_order .icon .icon-up,
+#search_order_list_transferring .choice_type_search .type_current_order .icon .icon-up,
+#search_order_list_completed .choice_type_search .type_current_order .icon .icon-up,
+#search_order_list_need_treatment .choice_type_search .type_current_order .icon .icon-up {
+  display: none;
+}
+
+#search_order_list .choice_type_search .type_current_order .icon .icon-down,
+#search_order_list_success .choice_type_search .type_current_order .icon .icon-down,
+#search_order_list_shipping .choice_type_search .type_current_order .icon .icon-down,
+#search_order_list_transferring .choice_type_search .type_current_order .icon .icon-down,
+#search_order_list_completed .choice_type_search .type_current_order .icon .icon-down,
+#search_order_list_need_treatment .choice_type_search .type_current_order .icon .icon-down {
+  display: block;
+}
+
+#search_order_list .choice_type_search .list,
+#search_order_list_success .choice_type_search .list,
+#search_order_list_shipping .choice_type_search .list,
+#search_order_list_transferring .choice_type_search .list,
+#search_order_list_completed .choice_type_search .list,
+#search_order_list_need_treatment .choice_type_search .list {
+  background: #fff;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  left: 0;
+  z-index: 5;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  background-color: #fff;
+  border: 1px solid #e8e9eb;
+  border-top: none;
+  width: 115%;
+  display: none;
+}
+
+#search_order_list .choice_type_search .list li,
+#search_order_list_success .choice_type_search .list li,
+#search_order_list_shipping .choice_type_search .list li,
+#search_order_list_transferring .choice_type_search .list li,
+#search_order_list_completed .choice_type_search .list li,
+#search_order_list_need_treatment .choice_type_search .list li {
+  margin: 0 8px;
+  padding: 8px 15px;
+  line-height: 1.3;
+}
+
+#search_order_list .choice_type_search.gt_active .type_current_order .icon .icon-up,
+#search_order_list_success .choice_type_search.gt_active .type_current_order .icon .icon-up,
+#search_order_list_shipping .choice_type_search.gt_active .type_current_order .icon .icon-up,
+#search_order_list_transferring .choice_type_search.gt_active .type_current_order .icon .icon-up,
+#search_order_list_completed .choice_type_search.gt_active .type_current_order .icon .icon-up,
+#search_order_list_need_treatment .choice_type_search.gt_active .type_current_order .icon .icon-up {
+  display: block;
+}
+
+#search_order_list .choice_type_search.gt_active .type_current_order .icon .icon-down,
+#search_order_list_success .choice_type_search.gt_active .type_current_order .icon .icon-down,
+#search_order_list_shipping .choice_type_search.gt_active .type_current_order .icon .icon-down,
+#search_order_list_transferring .choice_type_search.gt_active .type_current_order .icon .icon-down,
+#search_order_list_completed .choice_type_search.gt_active .type_current_order .icon .icon-down,
+#search_order_list_need_treatment .choice_type_search.gt_active .type_current_order .icon .icon-down {
+  display: none;
+}
+
+#search_order_list .choice_type_search.gt_active .list,
+#search_order_list_success .choice_type_search.gt_active .list,
+#search_order_list_shipping .choice_type_search.gt_active .list,
+#search_order_list_transferring .choice_type_search.gt_active .list,
+#search_order_list_completed .choice_type_search.gt_active .list,
+#search_order_list_need_treatment .choice_type_search.gt_active .list {
+  display: block;
+}
+
+#search_order_list .input_search,
+#search_order_list_success .input_search,
+#search_order_list_shipping .input_search,
+#search_order_list_transferring .input_search,
+#search_order_list_completed .input_search,
+#search_order_list_need_treatment .input_search {
+  width: 65%;
+}
+
+#search_order_list .input_search #search_order_input,
+#search_order_list_success .input_search #search_order_input,
+#search_order_list_shipping .input_search #search_order_input,
+#search_order_list_transferring .input_search #search_order_input,
+#search_order_list_completed .input_search #search_order_input,
+#search_order_list_need_treatment .input_search #search_order_input {
+  height: 50px;
+  width: 100%;
+  background-color: #fff;
+  border: 1px solid #e8e9eb;
+  padding-left: 15px;
+  color: black;
+}
+
+#search_order_list .button_submit,
+#search_order_list_success .button_submit,
+#search_order_list_shipping .button_submit,
+#search_order_list_transferring .button_submit,
+#search_order_list_completed .button_submit,
+#search_order_list_need_treatment .button_submit {
+  width: 15%;
+}
+
+#search_order_list .button_submit input,
+#search_order_list_success .button_submit input,
+#search_order_list_shipping .button_submit input,
+#search_order_list_transferring .button_submit input,
+#search_order_list_completed .button_submit input,
+#search_order_list_need_treatment .button_submit input {
+  height: 50px;
+  width: 100%;
+  background: #38c172;
+  border: 1px solid transparent;
+  font-size: 18px;
+  color: #fff;
+  font-weight: bold;
+}
+

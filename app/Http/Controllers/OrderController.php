@@ -10,15 +10,15 @@ class OrderController extends Controller
 {
     public function index()
     {
-        $ordersSuccess = Order::where('statusCode', 'Success')->count();
+        $ordersSuccess = Order::where('statusGHTK', 5)->count();
 
-        $ordersShipping = Order::where('statusCode', 'Shipping')->count();
+        $ordersShipping = Order::where('statusGHTK', 4)->count();
 
-        $ordersReturning = Order::where('statusCode', 'Returning')->count();
+        $ordersReturning = Order::where('statusGHTK', 20)->count();
 
-        $ordersReturned = Order::where('statusCode', 'Returned')->count();
+        $ordersReturned = Order::where('statusGHTK', 21)->count();
 
-        $ordersCanXuLy = Order::whereIn('statusCode', ["Canceled", "SoldOut"])->count();
+        $ordersCanXuLy = Order::where('statusGHTK', 10)->count();
 
         $data = [
             'ordersSuccess'   => $ordersSuccess,
@@ -29,6 +29,20 @@ class OrderController extends Controller
         ];
 
         return view('orders.index', $data);
+    }
+
+    public function singleOrder($id)
+    {
+        $order = Order::where('id', $id)->first();
+
+        $products = Product::where('order_id', $id)->get();
+
+        $data = [
+            'order' => $order,
+            'products' => $products
+        ];
+
+        return view('orders.singleOrder', $data); 
     }
 
     function list() {
@@ -386,8 +400,7 @@ class OrderController extends Controller
 
     public function listOrdersSuccess()
     {
-        $orders = Order::where('statusCode', 'Success')
-            ->where('label_GHTK', '=', null)
+        $orders = Order::where('statusGHTK', 5)
             ->orderBy('createdDateTime', 'desc')
             ->latest()
             ->paginate(12);
@@ -404,8 +417,7 @@ class OrderController extends Controller
 
     public function listOrdersShipping()
     {
-        $orders = Order::where('statusCode', 'Shipping')
-            ->where('label_GHTK', '=', null)
+        $orders = Order::where('statusGHTK', 4)
             ->orderBy('createdDateTime', 'desc')
             ->latest()
             ->paginate(12);
@@ -422,8 +434,7 @@ class OrderController extends Controller
 
     public function listOrdersTransferring()
     {
-        $orders = Order::where('statusCode', 'Returning')
-            ->where('label_GHTK', '=', null)
+        $orders = Order::where('statusGHTK', 20)
             ->orderBy('createdDateTime', 'desc')
             ->latest()
             ->paginate(12);
@@ -440,8 +451,7 @@ class OrderController extends Controller
 
     public function listOrdersCompleted()
     {
-        $orders = Order::where('statusCode', 'Returned')
-            ->where('label_GHTK', '=', null)
+        $orders = Order::where('statusGHTK', 21)
             ->orderBy('createdDateTime', 'desc')
             ->latest()
             ->paginate(12);
@@ -458,8 +468,7 @@ class OrderController extends Controller
 
     public function listOrdersNeedTreatment()
     {
-        $orders = Order::whereIn('statusCode', ["Canceled", "SoldOut"])
-            ->where('label_GHTK', '=', null)
+        $orders = Order::where('statusGHTK', 10)
             ->orderBy('createdDateTime', 'desc')
             ->latest()
             ->paginate(12);
