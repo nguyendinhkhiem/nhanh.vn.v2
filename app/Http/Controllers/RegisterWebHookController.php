@@ -41,7 +41,7 @@ class RegisterWebHookController extends Controller
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_HTTP_VERSION   => CURL_HTTP_VERSION_1_1,
             CURLOPT_HTTPHEADER     => array(
-                "Token: 463eE26342a6e99379779711218C0cb2783E7a5b",
+                "Token: " . env('TOKEN_GHTK'),
             ),
         ));
 
@@ -61,7 +61,7 @@ class RegisterWebHookController extends Controller
             CURLOPT_CUSTOMREQUEST  => "POST",
             CURLOPT_POSTFIELDS     => $data,
             CURLOPT_HTTPHEADER     => array(
-                "Token: 463eE26342a6e99379779711218C0cb2783E7a5b",
+                "Token: " . env('TOKEN_GHTK'),
             ),
         ));
 
@@ -91,7 +91,7 @@ class RegisterWebHookController extends Controller
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_HTTP_VERSION   => CURL_HTTP_VERSION_1_1,
             CURLOPT_HTTPHEADER     => array(
-                "Token: 463eE26342a6e99379779711218C0cb2783E7a5b",
+                "Token: " . env('TOKEN_GHTK'),
             ),
         ));
 

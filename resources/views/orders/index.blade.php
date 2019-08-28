@@ -91,6 +91,7 @@
 			    <thead>
 			        <tr>
 			            <th scope="col"><input type="checkbox" name="choice_all" id="choice_all"></th>
+			            <th scope="col">#</th>
 			            <th scope="col">Mã ĐH</th>
 			            <th scope="col">Ngày tạo</th>
 			            <th scope="col">Khách Hàng</th>

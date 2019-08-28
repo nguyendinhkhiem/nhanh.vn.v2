@@ -81,7 +81,7 @@ class OrderGiaoHangTietKiemControllers extends Controller
                 CURLOPT_POSTFIELDS     => $dataString,
                 CURLOPT_HTTPHEADER     => array(
                     "Content-Type: application/json",
-                    "Token: 463eE26342a6e99379779711218C0cb2783E7a5b",
+                    "Token: ". env('TOKEN_GHTK'),
                     "Content-Length: " . strlen($dataString),
                 ),
             ));
@@ -130,7 +130,7 @@ class OrderGiaoHangTietKiemControllers extends Controller
                 CURLOPT_CUSTOMREQUEST  => "POST",
                 CURLOPT_HTTP_VERSION   => CURL_HTTP_VERSION_1_1,
                 CURLOPT_HTTPHEADER     => array(
-                    "Token: 463eE26342a6e99379779711218C0cb2783E7a5b",
+                    "Token: ". env('TOKEN_GHTK'),
                 ),
             ));
 
@@ -218,7 +218,7 @@ class OrderGiaoHangTietKiemControllers extends Controller
             CURLOPT_POSTFIELDS     => $dataString,
             CURLOPT_HTTPHEADER     => array(
                 "Content-Type: application/json",
-                "Token: 463eE26342a6e99379779711218C0cb2783E7a5b",
+                "Token: ". env('TOKEN_GHTK'),
                 "Content-Length: " . strlen($dataString),
             ),
         ));
@@ -241,7 +241,7 @@ class OrderGiaoHangTietKiemControllers extends Controller
             CURLOPT_CUSTOMREQUEST  => "POST",
             CURLOPT_HTTP_VERSION   => CURL_HTTP_VERSION_1_1,
             CURLOPT_HTTPHEADER     => array(
-                "Token: 463eE26342a6e99379779711218C0cb2783E7a5b",
+                "Token: ". env('TOKEN_GHTK'),
             ),
         ));
 

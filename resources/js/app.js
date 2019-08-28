@@ -121,6 +121,7 @@ $(document).ready(function() {
                                     var itemOrder = item.order[iOrder]
                                     htmlItem += '<tr class="item">';
                                     htmlItem += '<th scope="row"><input class="item-order-nhanh" type="checkbox" name="order_id_nhanh" data-idNhanh="' + itemOrder.id_nhanhvn + '" data-status="' + itemOrder.statusCode + '"></th>';
+                                    htmlItem += '<td>' + (i + 1) + '</td>';
                                     htmlItem += '<td>' + itemOrder.id_nhanhvn + '</td>';
                                     htmlItem += '<td>' + itemOrder.createdDateTime + '</td>';
                                     htmlItem += '<td>' + itemOrder.customerName + '</td>';
@@ -578,7 +579,7 @@ $(document).ready(function() {
                                 var respon = response.data[i];
 
                                 htmlRespon += '<div class="item">'
-                                htmlRespon += '<p><span>' + i + ':</span>  ' + respon.message + '</p>';
+                                htmlRespon += '<p><span>' + (i + 1) + ':</span>  ' + respon.message + '</p>';
                                 if (respon.error) {
                                     htmlRespon += '<p>' + respon.error.ghtk_label + '</p>';
                                 }
@@ -630,33 +631,49 @@ $(document).ready(function() {
         }
     });
 
+    var array_id_ghtk_new = [];
     $('#search_list_order_clone .cancle_ghtk').click(function(e) {
         e.preventDefault();
-        $('.loading').addClass('active');
+        // $('.loading').addClass('active');
 
-        var array_id_ghtk_new = [jQuery(this).attr('data-label')];
+        var label_GHTK = jQuery(this).attr('data-label');
+        array_id_ghtk_new.push(label_GHTK);
 
-        window.axios.post('/cancle-order-ghtk', {
-                params: {
-                    data_label: array_id_ghtk_new
-                }
-            })
-            .then(function(response) {
-                console.log('response ', response)
-                if (response.status == 200) {
+        $('#exampleModalCancleGHTK').modal('show');
+
+        $('#comfrim-cancle').click(function(e){
+            $('#exampleModalCancleGHTK').modal('hide');
+            $('.loading').addClass('active');
+            window.axios.post('/cancle-order-ghtk', {
+                    params: {
+                        data_label: array_id_ghtk_new
+                    }
+                })
+                .then(function(response) {
+                    console.log('response ', response)
+                    if (response.status == 200) {
+                        $('.loading').removeClass('active')
+                        alert('Bạn đã huỷ thành công Đơn Hàng');
+                        array_id_ghtk_new = []
+                        window.location.href = window.location.href;
+                    }
+                })
+                .catch(function(error) {
                     $('.loading').removeClass('active')
                     alert('Bạn đã huỷ thành công Đơn Hàng');
+                    array_id_ghtk_new = []
                     window.location.href = window.location.href;
-                }
-            })
-            .catch(function(error) {
-                $('.loading').removeClass('active')
-                alert('Bạn đã huỷ thành công Đơn Hàng');
-                window.location.href = window.location.href;
-                console.log(error);
-            })
-            .finally(function() {
-                // always executed
-            });
+                    console.log(error);
+                })
+                .finally(function() {
+                    // always executed
+                });
+        });
+
+        $('#comfrim-close').click(function(e){
+             e.preventDefault();
+             array_id_ghtk_new = []
+             $('#exampleModalCancleGHTK').modal('hide');
+        })
     })
 })

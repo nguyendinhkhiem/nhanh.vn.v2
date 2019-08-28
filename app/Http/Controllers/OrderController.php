@@ -245,7 +245,7 @@ class OrderController extends Controller
             $dataString = $data;
         }
 
-        return md5(md5('VYx44TFEAtyJffKkAFkR33aj' . $dataString) . $dataString);
+        return md5(md5(env('TOKEN_NHANHVN') . $dataString) . $dataString);
     }
 
     public function searchDeQuy($totalPages, $currentPage, $type, $value)

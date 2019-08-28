@@ -193,7 +193,11 @@
 								@endif
 							</td>
 							@if($item->label_GHTK != null)
-								<td><div class="cancle_ghtk" data-label="{{ $item->label_GHTK }}">Huỷ Đơn</div></td>
+								<td>
+									@if ($item->statusGHTK != '-1')
+										<div class="cancle_ghtk" data-label="{{ $item->label_GHTK }}">Huỷ Đơn</div>
+									@endif
+								</td>
 							@else
 								<td></td>
 							@endif
@@ -244,4 +248,23 @@
 			</div>
 		</div>
 	</div>
+	<div class="modal fade" id="exampleModalCancleGHTK" tabindex="-1" role="dialog" aria-labelledby="exampleModalCancleGHTKLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Bạn có đồng ý huỷ đơn hàng trên GHTK
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" id="comfrim-close">Close</button>
+                <button type="button" class="btn btn-primary" id="comfrim-cancle">Đồng Ý</button>
+            </div>
+        </div>
+    </div>
+</div>
 @endsection
