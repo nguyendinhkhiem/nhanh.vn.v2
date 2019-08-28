@@ -41,31 +41,31 @@
 		<div class="categoris_order">
 			<ul class="list">
 				<li class="item Success">
-					<a href="{!! route('list-success') !!}">
+					<a href="">
 						Thành công <span class="number">{{ $ordersSuccess }}</span>
 					</a>
 				</li>
 
 				<li class="item Shipping">
-					<a href="{!! route('list-shipping') !!}">
+					<a href="">
 						Đang chuyển <span class="number">{{ $ordersShipping }}</span>
 					</a>
 				</li>
 
 				<li class="item Transferring">
-					<a href="{!! route('list-transferring') !!}">
+					<a href="">
 						Đang chuyển hoàn <span class="number">{{ $ordersReturning }}</span>
 					</a>
 				</li>
 
 				<li class="item Completed">
-					<a href="{!! route('list-completed') !!}">
+					<a href="">
 						Đã hoàn <span class="number">{{ $ordersReturned }}</span>
 					</a>
 				</li>
 
 				<li class="item NeedTreatment">
-					<a href="{!! route('list-need-treatment') !!}">
+					<a href="">
 						Cần xử lý <span class="number">{{ $ordersCanXuLy }}</span>
 					</a>
 				</li>
@@ -73,10 +73,24 @@
 		</div>
 
 		<div class="response_search">
+			<div class="header_order">
+				<div class="create_order_on_ghtk">
+					<form id="info-call-ghtk-new">
+					    <div class="form-group">
+					        <select class="form-control" id="info-received">
+					            @foreach ($info as $item)
+					                <option data-id="{{ $item->id }}">{{ $item->pick_name }}</option>
+					            @endforeach
+					        </select>
+					    </div>
+					    <button type="submit" class="btn btn-primary">Đăng Ký Đơn lên GHTK</button>
+					</form>
+				</div>
+			</div>
 			<table class="table">
 			    <thead>
 			        <tr>
-			            <th scope="col">#</th>
+			            <th scope="col"><input type="checkbox" name="choice_all" id="choice_all"></th>
 			            <th scope="col">Mã ĐH</th>
 			            <th scope="col">Ngày tạo</th>
 			            <th scope="col">Khách Hàng</th>
@@ -87,7 +101,7 @@
 			            <th scope="col">Trạng thái Search</th>
 			        </tr>
 			    </thead>
-			    <tbody id="list_order_search">
+			    <tbody class="list_order_search" id="list_order_search">
 			    </tbody>
 			</table>
 		</div>

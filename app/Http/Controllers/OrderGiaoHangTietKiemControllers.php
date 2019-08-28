@@ -142,10 +142,24 @@ class OrderGiaoHangTietKiemControllers extends Controller
             $response = json_decode($response);
         }
 
+        if ($converResponse->message == 'Đơn hàng đã ở trạng thái hủy') {
+            foreach ($data['params']['data_label'] as $key => $item) {
+                $ghtkUpdate = Deliverys::where('label', $item)->update([
+                    'status_id' => "-1",
+                ]);
+                $nhanhvn = Order::where('label_GHTK', $item)->update([
+                    'statusGHTK' => "-1",
+                ]);
+            }
+            return $response;
+        }
         if ($converResponse->success == true) {
             foreach ($data['params']['data_label'] as $key => $item) {
                 $ghtkUpdate = Deliverys::where('label', $item)->update([
                     'status_id' => "-1",
+                ]);
+                $nhanhvn = Order::where('label_GHTK', $item)->update([
+                    'statusGHTK' => "-1",
                 ]);
             }
 

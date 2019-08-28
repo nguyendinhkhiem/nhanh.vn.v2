@@ -117,9 +117,9 @@
 						<svg aria-hidden="true" focusable="false" data-prefix="fal" data-icon="ellipsis-h" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" class="svg-inline--fa fa-ellipsis-h fa-w-10"><path fill="currentColor" d="M192 256c0 17.7-14.3 32-32 32s-32-14.3-32-32 14.3-32 32-32 32 14.3 32 32zm88-32c-17.7 0-32 14.3-32 32s14.3 32 32 32 32-14.3 32-32-14.3-32-32-32zm-240 0c-17.7 0-32 14.3-32 32s14.3 32 32 32 32-14.3 32-32-14.3-32-32-32z" class=""></path></svg>
 					</div>
 				</div>
-				<ul class="list_action">
-					<li class="">
-						Đơn hàng chưa lên GHTK
+				<ul class="list_action page_list">
+					<li class="list_order_ghtk_action">
+						<a href="{{ route('list-nhanh') }}/?type_not_ghtk">Đơn hàng chưa lên GHTK</a>
 					</li>
 				</ul>
 			</div>
@@ -137,6 +137,7 @@
 			            <th scope="col">Tổng tiền</th>
 			            <th scope="col">Trạng thái đơn hàng nhanh</th>
 			            <th scope="col">Trạng thái GHTK</th>
+			            <th scope="col">Thao tác</th>
 			        </tr>
 			    </thead>
 
@@ -165,33 +166,82 @@
 							<td>{!! $nameProducts !!}</td>
 							<td>{{ $item->calcTotalMoney }}</td>
 							<td>{{ $item->statusName }}</td>
+							{{-- <td>{{ $item->statusGHTK }}</td> --}}
+							<td>
+								@if ($item->statusGHTK == '-1')
+									Đã Huỷ
+								@endif
+
+								@if ($item->statusGHTK == '4')
+									Đang shipping
+								@endif
+
+								@if ($item->statusGHTK == '5')
+									Thành Công
+								@endif
+
+								@if ($item->statusGHTK == '10')
+									Cần xử lý
+								@endif
+
+								@if ($item->statusGHTK == '20')
+									Đang chuyển hoàn
+								@endif
+
+								@if ($item->statusGHTK == '21')
+									Đã hoàn
+								@endif
+							</td>
 							@if($item->label_GHTK != null)
-								<td>{{ $item->label_GHTK }}</td>
+								<td><div class="cancle_ghtk" data-label="{{ $item->label_GHTK }}">Huỷ Đơn</div></td>
 							@else
-								<td>Chưa lên GHTK</td>
+								<td></td>
 							@endif
 					    </tr>
 				    @endforeach
 			    </tbody>
 			</table>
-			<div class="pagination" id="">
-				{!! $orders->links() !!}
+			<div class="list_footer">
+				<div class="number_show_order">
+					<div class="current_numberPage">
+						@if ($_GET)
+							@if (isset($_GET['show_number']))
+								{{ $_GET['show_number'] }}
+							@else
+								20
+							@endif
+						@else
+						 	20
+						@endif
+					</div>
+					<ul class="list_number">
+						<li class="item" data-number="100">
+							@if (isset($_GET['type_not_ghtk']))
+								<a href="{{ route('list-nhanh') }}/?show_number=100&type_not_ghtk">100</a>
+							@else
+								<a href="{{ route('list-nhanh') }}/?show_number=100">100</a>
+							@endif
+						</li>				
+						<li class="item" data-number="50">
+							@if (isset($_GET['type_not_ghtk']))
+								<a href="{{ route('list-nhanh') }}/?show_number=50&type_not_ghtk">50</a>
+							@else
+								<a href="{{ route('list-nhanh') }}/?show_number=50">50</a>
+							@endif
+						</li>
+						<li class="item" data-number="20">
+							@if (isset($_GET['type_not_ghtk']))
+								<a href="{{ route('list-nhanh') }}/?show_number=20&type_not_ghtk">20</a>
+							@else
+								<a href="{{ route('list-nhanh') }}/?show_number=20">50</a>
+							@endif
+						</li>
+					</ul>
+				</div>
+				<div class="pagination" id="">
+					{!! $orders->links() !!}
+				</div>
 			</div>
 		</div>
-	</div>
-	<!-- Modal -->
-	<div class="modal fade" id="exampleModalCenterListOrder" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-	    <div class="modal-dialog modal-dialog-centered" role="document">
-	        <div class="modal-content">
-	            <div class="modal-header">
-	                <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
-	                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-	                    <span aria-hidden="true">&times;</span>
-	                </button>
-	            </div>
-	            <div class="modal-body" id="ketqua_create_ghtk">
-	            </div>
-	        </div>
-	    </div>
 	</div>
 @endsection

@@ -19,6 +19,7 @@ class OrderController extends Controller
         $ordersReturned = Order::where('statusGHTK', 21)->count();
 
         $ordersCanXuLy = Order::where('statusGHTK', 10)->count();
+        $info          = Information::get();
 
         $data = [
             'ordersSuccess'   => $ordersSuccess,
@@ -26,6 +27,7 @@ class OrderController extends Controller
             'ordersReturning' => $ordersReturning,
             'ordersReturned'  => $ordersReturned,
             'ordersCanXuLy'   => $ordersCanXuLy,
+            'info'            => $info,
         ];
 
         return view('orders.index', $data);
@@ -38,21 +40,33 @@ class OrderController extends Controller
         $products = Product::where('order_id', $id)->get();
 
         $data = [
-            'order' => $order,
-            'products' => $products
+            'order'    => $order,
+            'products' => $products,
         ];
 
-        return view('orders.singleOrder', $data); 
+        return view('orders.singleOrder', $data);
     }
 
     function list() {
-        $orders = Order::latest()
-            ->paginate(20);
+        $numberPage = 20;
+        if ($_GET) {
+            if (isset($_GET['show_number'])) {
+                $numberPage = $_GET['show_number'];
+            }
+        }
+
+        $query = new Order;
+        if ($_GET) {
+            if (isset($_GET['type_not_ghtk'])) {
+                $query = $query ->where('label_GHTK', '=', null);
+            }
+        }
+        $query = $query->latest()->paginate($numberPage);
 
         $info = Information::get();
 
         $data = [
-            'orders' => $orders,
+            'orders' => $query,
             'info'   => $info,
         ];
 
@@ -394,90 +408,5 @@ class OrderController extends Controller
             }
             curl_close($curl);
         }
-    }
-
-    public function listOrdersSuccess()
-    {
-        $orders = Order::where('statusGHTK', 5)
-            ->orderBy('createdDateTime', 'desc')
-            ->latest()
-            ->paginate(12);
-
-        $info = Information::get();
-
-        $data = [
-            'orders' => $orders,
-            'info'   => $info,
-        ];
-
-        return view('orders.ordersSuccess', $data);
-    }
-
-    public function listOrdersShipping()
-    {
-        $orders = Order::where('statusGHTK', 4)
-            ->orderBy('createdDateTime', 'desc')
-            ->latest()
-            ->paginate(12);
-
-        $info = Information::get();
-
-        $data = [
-            'orders' => $orders,
-            'info'   => $info,
-        ];
-
-        return view('orders.ordersShipping', $data);
-    }
-
-    public function listOrdersTransferring()
-    {
-        $orders = Order::where('statusGHTK', 20)
-            ->orderBy('createdDateTime', 'desc')
-            ->latest()
-            ->paginate(12);
-
-        $info = Information::get();
-
-        $data = [
-            'orders' => $orders,
-            'info'   => $info,
-        ];
-
-        return view('orders.ordersTransferring', $data);
-    }
-
-    public function listOrdersCompleted()
-    {
-        $orders = Order::where('statusGHTK', 21)
-            ->orderBy('createdDateTime', 'desc')
-            ->latest()
-            ->paginate(12);
-
-        $info = Information::get();
-
-        $data = [
-            'orders' => $orders,
-            'info'   => $info,
-        ];
-
-        return view('orders.ordersCompleted', $data);
-    }
-
-    public function listOrdersNeedTreatment()
-    {
-        $orders = Order::where('statusGHTK', 10)
-            ->orderBy('createdDateTime', 'desc')
-            ->latest()
-            ->paginate(12);
-
-        $info = Information::get();
-
-        $data = [
-            'orders' => $orders,
-            'info'   => $info,
-        ];
-
-        return view('orders.ordersNeedTreatment', $data);
     }
 }

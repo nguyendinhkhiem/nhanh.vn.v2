@@ -11167,7 +11167,7 @@ a.text-dark:focus {
 
 .header_order .action_list .contain {
   display: inline-block;
-  background: red;
+  background: #bec4ca;
   width: 50px;
   height: 50px;
   border-radius: 5px;
@@ -11181,6 +11181,10 @@ a.text-dark:focus {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+.header_order .list_action.gt_active {
+  display: block;
 }
 
 .header_order .list_action {
@@ -11197,11 +11201,59 @@ a.text-dark:focus {
   border: 1px solid #e8e9eb;
   border-top: none;
   width: 100%;
+  display: none;
 }
 
 .header_order .list_action li {
   margin: 0 8px;
   padding: 8px 15px;
   line-height: 1.3;
+  cursor: pointer;
+}
+
+.list_footer {
+  display: flex;
+}
+
+.list_footer .number_show_order {
+  position: relative;
+}
+
+.list_footer .number_show_order .current_numberPage {
+  background-color: #fff;
+  border: 1px solid #e8e9eb;
+  margin-bottom: 0px;
+  height: 35px;
+  padding: 5px 20px 0px 20px;
+  display: flex;
+  justify-content: space-between;
+  margin-right: 4px;
+}
+
+.list_footer .number_show_order .list_number.gt_active {
+  display: block;
+}
+
+.list_footer .number_show_order .list_number {
+  padding: 0;
+  margin: 0;
+  position: absolute;
+  list-style: none;
+  border: 1px solid #ddd;
+  width: 200%;
+  top: -102px;
+  background: #fff;
+  display: none;
+}
+
+.list_footer .number_show_order .list_number li a {
+  display: block;
+  padding: 5px;
+  padding-left: 10px;
+}
+
+.list_order_search .cancle_ghtk {
+  cursor: pointer;
+  color: red;
 }
 

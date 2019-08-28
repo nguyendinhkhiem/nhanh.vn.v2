@@ -17,11 +17,7 @@
 
 Route::get('/', 'OrderController@index')->name('page-search');
 Route::get('/list', 'OrderController@list')->name('list-nhanh');
-Route::get('/list-success', 'OrderController@listOrdersSuccess')->name('list-success');
-Route::get('/list-shipping', 'OrderController@listOrdersShipping')->name('list-shipping');
-Route::get('/list-transferring', 'OrderController@listOrdersTransferring')->name('list-transferring');
-Route::get('/list-completed', 'OrderController@listOrdersCompleted')->name('list-completed');
-Route::get('/list-need-treatment', 'OrderController@listOrdersNeedTreatment')->name('list-need-treatment');
+Route::post('/list-not-ghtk', 'OrderController@listOrdersNotGhtk');
 Route::get('/setting', 'InfomationController@index');
 
 Route::get('/list-ghtk', 'OrderGiaoHangTietKiemControllers@index')->name('list-ghtk');
