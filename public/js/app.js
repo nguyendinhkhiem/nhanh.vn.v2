@@ -37256,6 +37256,7 @@ $(document).ready(function () {
             htmlItem += '</tr>';
             $('#search_list_order_clone').html(htmlItem);
             $('.pagination').remove();
+            cancleGHTK();
           }
         } else {
           alert('Không tìm thấy kết quả!');
@@ -37378,44 +37379,49 @@ $(document).ready(function () {
       $listNumber.addClass('gt_active');
     }
   });
-  var array_id_ghtk_new = [];
-  $('#search_list_order_clone .cancle_ghtk').click(function (e) {
-    e.preventDefault(); // $('.loading').addClass('active');
 
-    var label_GHTK = jQuery(this).attr('data-label');
-    array_id_ghtk_new.push(label_GHTK);
-    $('#exampleModalCancleGHTK').modal('show');
-    $('#comfrim-cancle').click(function (e) {
-      $('#exampleModalCancleGHTK').modal('hide');
-      $('.loading').addClass('active');
-      window.axios.post('/cancle-order-ghtk', {
-        params: {
-          data_label: array_id_ghtk_new
-        }
-      }).then(function (response) {
-        console.log('response ', response);
+  function cancleGHTK() {
+    var array_id_ghtk_new = [];
+    $('#search_list_order_clone .cancle_ghtk').click(function (e) {
+      e.preventDefault(); // $('.loading').addClass('active');
 
-        if (response.status == 200) {
+      var label_GHTK = jQuery(this).attr('data-label');
+      array_id_ghtk_new.push(label_GHTK);
+      $('#exampleModalCancleGHTK').modal('show');
+      $('#comfrim-cancle').click(function (e) {
+        $('#exampleModalCancleGHTK').modal('hide');
+        $('.loading').addClass('active');
+        window.axios.post('/cancle-order-ghtk', {
+          params: {
+            data_label: array_id_ghtk_new
+          }
+        }).then(function (response) {
+          console.log('response ', response);
+
+          if (response.status == 200) {
+            $('.loading').removeClass('active');
+            alert('Bạn đã huỷ thành công Đơn Hàng');
+            array_id_ghtk_new = [];
+            window.location.href = window.location.href;
+          }
+        })["catch"](function (error) {
           $('.loading').removeClass('active');
           alert('Bạn đã huỷ thành công Đơn Hàng');
           array_id_ghtk_new = [];
           window.location.href = window.location.href;
-        }
-      })["catch"](function (error) {
-        $('.loading').removeClass('active');
-        alert('Bạn đã huỷ thành công Đơn Hàng');
+          console.log(error);
+        })["finally"](function () {// always executed
+        });
+      });
+      $('#comfrim-close').click(function (e) {
+        e.preventDefault();
         array_id_ghtk_new = [];
-        window.location.href = window.location.href;
-        console.log(error);
-      })["finally"](function () {// always executed
+        $('#exampleModalCancleGHTK').modal('hide');
       });
     });
-    $('#comfrim-close').click(function (e) {
-      e.preventDefault();
-      array_id_ghtk_new = [];
-      $('#exampleModalCancleGHTK').modal('hide');
-    });
-  });
+  }
+
+  cancleGHTK();
 });
 
 /***/ }),
