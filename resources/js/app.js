@@ -178,15 +178,18 @@ $(document).ready(function() {
                 });
         } else {
             if (type == 'handoverId') {
-                alert('Bạn hãy nhập ID Biên bản bàn giao')
+                alert('Bạn hãy nhập ID Biên bản bàn giao');
+                $('.loading').removeClass('active')
             }
 
             if (type == 'id') {
-                alert('Bạn hãy nhập ID Đơn Hàng')
+                alert('Bạn hãy nhập ID Đơn Hàng');
+                $('.loading').removeClass('active')
             }
 
             if (type == 'customerMobile') {
                 alert('Bạn hãy nhập Số Điện Thoại Khách Hàng')
+                $('.loading').removeClass('active')
             }
         }
     })
@@ -539,6 +542,9 @@ $(document).ready(function() {
                 return 'Thành Công'
                 break;
             case '4':
+                return 'Đang shipping'
+                break;
+            case '2':
                 return 'Đang shipping'
                 break;
             case '10':

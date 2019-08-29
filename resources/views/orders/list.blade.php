@@ -95,7 +95,7 @@
 						<input type="text" value="" name="search_order_input" required="true" id="search_order_input" placeholder="Nhập thông tin">
 					</div>
 					<div class="button_submit">
-						<input type="submit" name="submit_search_orders">
+						<input type="submit" name="submit_search_orders" value="Tìm kiếm">
 					</div>
 				</form>
 			</div>
@@ -172,7 +172,7 @@
 									Đã Huỷ
 								@endif
 
-								@if ($item->statusGHTK == '4')
+								@if ($item->statusGHTK == '4' || $item->statusGHTK == '2')
 									Đang shipping
 								@endif
 
