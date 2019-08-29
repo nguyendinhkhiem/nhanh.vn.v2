@@ -36923,6 +36923,9 @@ $(document).ready(function () {
           }
 
           $('.loading').removeClass('active');
+        } else {
+          alert('Không tìm thấy kết!');
+          $('.loading').removeClass('active');
         }
       })["catch"](function (error) {
         // handle error
