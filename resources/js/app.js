@@ -534,31 +534,34 @@ $(document).ready(function() {
     });
 
     function checkStatus(type) {
+        $name = '';
         switch (type) {
             case '-1':
-                return 'Đã Huỷ'
+                $name = 'Đã Huỷ';
                 break;
             case '5':
-                return 'Thành Công'
+                $name = 'Thành Công';
                 break;
             case '4':
-                return 'Đang shipping'
+                $name = 'Đang shipping';
                 break;
             case '2':
-                return 'Đang shipping'
+                $name = 'Đang shipping';
                 break;
             case '10':
-                return 'Cần xử lý'
+                $name = 'Cần xử lý';
                 break;
             case '20':
-                return 'Đang chuyển hoàn'
+                $name = 'Đang chuyển hoàn';
                 break;
             case '21':
-                return 'Đã hoàn'
+                $name = 'Đã hoàn';
                 break;
             default:
                 return '';
         }
+
+        return $name;
     }
 
     $('#info-call-ghtk-new').submit(function(e) {
