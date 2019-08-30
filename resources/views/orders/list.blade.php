@@ -111,7 +111,8 @@
 				    <button type="submit" class="btn btn-primary">Đăng Ký Đơn lên GHTK</button>
 				</form>
 			</div>
-			<div style="width: 20%;position: relative;">
+
+			<div style="width: 20%;position: relative;" class="{{ isset($_GET['template-type']) ? 'template-type' : '' }}">
 				<div class="action_list">
 					<div class="contain">
 						<svg aria-hidden="true" focusable="false" data-prefix="fal" data-icon="ellipsis-h" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" class="svg-inline--fa fa-ellipsis-h fa-w-10"><path fill="currentColor" d="M192 256c0 17.7-14.3 32-32 32s-32-14.3-32-32 14.3-32 32-32 32 14.3 32 32zm88-32c-17.7 0-32 14.3-32 32s14.3 32 32 32 32-14.3 32-32-14.3-32-32-32zm-240 0c-17.7 0-32 14.3-32 32s14.3 32 32 32 32-14.3 32-32-14.3-32-32-32z" class=""></path></svg>
@@ -124,129 +125,135 @@
 				</ul>
 			</div>
 		</div>
-		<div class="list_order_list">
-			<table class="table">
-			    <thead>
-			        <tr>
-			            <th scope="col"><input type="checkbox" name="choice_all" id="choice_all"></th>
-			            <th scope="col">Mã ĐH</th>
-			            <th scope="col">Mã Đơn GHTK</th>
-			            <th scope="col">Khách Hàng</th>
-			            <th scope="col">Số điện thoại</th>
-			            <th scope="col">Sản Phẩm</th>
-			            <th scope="col">Tổng tiền</th>
-			            <th scope="col">Trạng thái đơn hàng nhanh</th>
-			            <th scope="col">Trạng thái GHTK</th>
-			            <th scope="col">Thao tác</th>
-			        </tr>
-			    </thead>
+		@if ($orders->count() > 0)
+			<div class="list_order_list">
+				<table class="table">
+				    <thead>
+				        <tr>
+				            <th scope="col"><input type="checkbox" name="choice_all" id="choice_all"></th>
+				            <th scope="col">Mã ĐH</th>
+				            <th scope="col">Mã Đơn GHTK</th>
+				            <th scope="col">Khách Hàng</th>
+				            <th scope="col">Số điện thoại</th>
+				            <th scope="col">Sản Phẩm</th>
+				            <th scope="col">Tổng tiền</th>
+				            <th scope="col">Trạng thái đơn hàng nhanh</th>
+				            <th scope="col">Trạng thái GHTK</th>
+				            <th scope="col">Thao tác</th>
+				        </tr>
+				    </thead>
 
-			    <tbody class="list_order_search" id="search_list_order_clone">
-			    	@foreach ($orders as $key => $item)
-			    		@php
-			    			$nameProducts = '';
-			    			$products = json_decode($item->products);
+				    <tbody class="list_order_search" id="search_list_order_clone">
+				    	@foreach ($orders as $key => $item)
+				    		@php
+				    			$nameProducts = '';
+				    			$products = json_decode($item->products);
 
-			    			foreach ($products as $i => $product) {
-			    				if ($i > 0) {
-			    					$nameProducts .= '<br> ' . $product->name;
-			    				}else{
-			    					$nameProducts .= $product->name;
-			    				}
-			    			}
-			    		@endphp
-				    	<tr class="item" data-idNhanh="{{ $item->id_nhanhvn }}" data-status="{{ $item->statusCode }}">
-							<th scope="row">
-								<input class="item-order-nhanh" type="checkbox" name="order_id_nhanh" data-idNhanh="{{ $item->id_nhanhvn }}" data-status="{{ $item->statusCode }}">
-							</th>
-							<td><a href="{!! route('single-order', $item->id) !!}">{{ $item->id_nhanhvn }}</a></td>
-							<td>{{ $item->label_GHTK }}</td>
-							<td>{{ $item->customerName }}</td>
-							<td>{{ $item->customerMobile }}</td>
-							<td>{!! $nameProducts !!}</td>
-							<td>{{ $item->calcTotalMoney }}</td>
-							<td>{{ $item->statusName }}</td>
-							{{-- <td>{{ $item->statusGHTK }}</td> --}}
-							<td>
-								@if ($item->statusGHTK == '-1')
-									Đã Huỷ
-								@endif
-
-								@if ($item->statusGHTK == '4' || $item->statusGHTK == '2')
-									Đang shipping
-								@endif
-
-								@if ($item->statusGHTK == '5')
-									Thành Công
-								@endif
-
-								@if ($item->statusGHTK == '10')
-									Cần xử lý
-								@endif
-
-								@if ($item->statusGHTK == '20')
-									Đang chuyển hoàn
-								@endif
-
-								@if ($item->statusGHTK == '21')
-									Đã hoàn
-								@endif
-							</td>
-							@if($item->label_GHTK != null)
+				    			foreach ($products as $i => $product) {
+				    				if ($i > 0) {
+				    					$nameProducts .= '<br> ' . $product->name;
+				    				}else{
+				    					$nameProducts .= $product->name;
+				    				}
+				    			}
+				    		@endphp
+					    	<tr class="item" data-idNhanh="{{ $item->id_nhanhvn }}" data-status="{{ $item->statusCode }}">
+								<th scope="row">
+									<input class="item-order-nhanh" type="checkbox" name="order_id_nhanh" data-idNhanh="{{ $item->id_nhanhvn }}" data-status="{{ $item->statusCode }}">
+								</th>
+								<td><a href="{!! route('single-order', $item->id) !!}">{{ $item->id_nhanhvn }}</a></td>
+								<td>{{ $item->label_GHTK }}</td>
+								<td>{{ $item->customerName }}</td>
+								<td>{{ $item->customerMobile }}</td>
+								<td>{!! $nameProducts !!}</td>
+								<td>{{ $item->calcTotalMoney }}</td>
+								<td>{{ $item->statusName }}</td>
+								{{-- <td>{{ $item->statusGHTK }}</td> --}}
 								<td>
-									@if ($item->statusGHTK != '-1')
-										<div class="cancle_ghtk" data-label="{{ $item->label_GHTK }}">Huỷ Đơn</div>
+									@if ($item->statusGHTK == '-1')
+										Đã Huỷ
+									@endif
+
+									@if ($item->statusGHTK == '4' || $item->statusGHTK == '2')
+										Đang shipping
+									@endif
+
+									@if ($item->statusGHTK == '5')
+										Thành Công
+									@endif
+
+									@if ($item->statusGHTK == '10')
+										Cần xử lý
+									@endif
+
+									@if ($item->statusGHTK == '20')
+										Đang chuyển hoàn
+									@endif
+
+									@if ($item->statusGHTK == '21')
+										Đã hoàn
 									@endif
 								</td>
+								@if($item->label_GHTK != null)
+									<td>
+										@if ($item->statusGHTK != '-1')
+											<div class="cancle_ghtk" data-label="{{ $item->label_GHTK }}">Huỷ Đơn</div>
+										@endif
+									</td>
+								@else
+									<td></td>
+								@endif
+						    </tr>
+					    @endforeach
+				    </tbody>
+				</table>
+				<div class="list_footer">
+					<div class="number_show_order">
+						<div class="current_numberPage">
+							@if ($_GET)
+								@if (isset($_GET['show_number']))
+									{{ $_GET['show_number'] }}
+								@else
+									20
+								@endif
 							@else
-								<td></td>
+							 	20
 							@endif
-					    </tr>
-				    @endforeach
-			    </tbody>
-			</table>
-			<div class="list_footer">
-				<div class="number_show_order">
-					<div class="current_numberPage">
-						@if ($_GET)
-							@if (isset($_GET['show_number']))
-								{{ $_GET['show_number'] }}
-							@else
-								20
-							@endif
-						@else
-						 	20
-						@endif
+						</div>
+						<ul class="list_number">
+							<li class="item" data-number="100">
+								@if (isset($_GET['type_not_ghtk']))
+									<a href="{{ route('list-nhanh') }}/?show_number=100&type_not_ghtk">100</a>
+								@else
+									<a href="{{ route('list-nhanh') }}/?show_number=100">100</a>
+								@endif
+							</li>				
+							<li class="item" data-number="50">
+								@if (isset($_GET['type_not_ghtk']))
+									<a href="{{ route('list-nhanh') }}/?show_number=50&type_not_ghtk">50</a>
+								@else
+									<a href="{{ route('list-nhanh') }}/?show_number=50">50</a>
+								@endif
+							</li>
+							<li class="item" data-number="20">
+								@if (isset($_GET['type_not_ghtk']))
+									<a href="{{ route('list-nhanh') }}/?show_number=20&type_not_ghtk">20</a>
+								@else
+									<a href="{{ route('list-nhanh') }}/?show_number=20">50</a>
+								@endif
+							</li>
+						</ul>
 					</div>
-					<ul class="list_number">
-						<li class="item" data-number="100">
-							@if (isset($_GET['type_not_ghtk']))
-								<a href="{{ route('list-nhanh') }}/?show_number=100&type_not_ghtk">100</a>
-							@else
-								<a href="{{ route('list-nhanh') }}/?show_number=100">100</a>
-							@endif
-						</li>				
-						<li class="item" data-number="50">
-							@if (isset($_GET['type_not_ghtk']))
-								<a href="{{ route('list-nhanh') }}/?show_number=50&type_not_ghtk">50</a>
-							@else
-								<a href="{{ route('list-nhanh') }}/?show_number=50">50</a>
-							@endif
-						</li>
-						<li class="item" data-number="20">
-							@if (isset($_GET['type_not_ghtk']))
-								<a href="{{ route('list-nhanh') }}/?show_number=20&type_not_ghtk">20</a>
-							@else
-								<a href="{{ route('list-nhanh') }}/?show_number=20">50</a>
-							@endif
-						</li>
-					</ul>
-				</div>
-				<div class="pagination" id="">
-					{!! $orders->links() !!}
+					<div class="pagination" id="">
+						{!! $orders->links() !!}
+					</div>
 				</div>
 			</div>
-		</div>
+		@else
+			<div>
+				Chưa có order!
+			</div>
+		@endif
 	</div>
 	<div class="modal fade" id="exampleModalCancleGHTK" tabindex="-1" role="dialog" aria-labelledby="exampleModalCancleGHTKLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">

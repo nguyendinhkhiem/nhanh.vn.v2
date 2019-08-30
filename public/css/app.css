@@ -11150,6 +11150,10 @@ a.text-dark:focus {
   font-weight: bold;
 }
 
+.header_order .template-type {
+  display: none;
+}
+
 .header_order .create_order_on_ghtk #info-call-ghtk-new {
   display: flex;
 }

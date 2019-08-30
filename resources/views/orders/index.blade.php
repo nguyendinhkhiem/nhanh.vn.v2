@@ -41,31 +41,31 @@
 		<div class="categoris_order">
 			<ul class="list">
 				<li class="item Success">
-					<a href="">
+					<a href="{{ route('list-nhanh') }}/?template-type=success">
 						Thành công <span class="number">{{ $ordersSuccess }}</span>
 					</a>
 				</li>
 
 				<li class="item Shipping">
-					<a href="">
+					<a href="{{ route('list-nhanh') }}/?template-type=shipping">
 						Đang chuyển <span class="number">{{ $ordersShipping }}</span>
 					</a>
 				</li>
 
 				<li class="item Transferring">
-					<a href="">
+					<a href="{{ route('list-nhanh') }}/?template-type=transferring">
 						Đang chuyển hoàn <span class="number">{{ $ordersReturning }}</span>
 					</a>
 				</li>
 
 				<li class="item Completed">
-					<a href="">
+					<a href="{{ route('list-nhanh') }}/?template-type=completed">
 						Đã hoàn <span class="number">{{ $ordersReturned }}</span>
 					</a>
 				</li>
 
 				<li class="item NeedTreatment">
-					<a href="">
+					<a href="{{ route('list-nhanh') }}/?template-type=NeedTreatment">
 						Cần xử lý <span class="number">{{ $ordersCanXuLy }}</span>
 					</a>
 				</li>

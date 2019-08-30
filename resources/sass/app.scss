@@ -481,6 +481,10 @@
 
     }
 
+    .template-type {
+        display: none;
+    }
+
     .create_order_on_ghtk {
         #info-call-ghtk-new {
             display: flex;
@@ -563,9 +567,11 @@
             justify-content: space-between;
             margin-right: 4px;
         }
-        .list_number.gt_active{
+
+        .list_number.gt_active {
             display: block;
         }
+
         .list_number {
             padding: 0;
             margin: 0;
@@ -588,8 +594,8 @@
     }
 }
 
-.list_order_search{
-    .cancle_ghtk{
+.list_order_search {
+    .cancle_ghtk {
         cursor: pointer;
         color: red;
     }

@@ -16,6 +16,10 @@ class Order extends Model
     const STATUS_NEW_CREATEED = 0; //mới clone của nhanh.vn.
 	const STATUS_OLD = 1; //database hệ thống đã có.
 
+    const STATUS_NEED_TREATMENT_TRUE = 1;
+    const STATUS_NEED_TREATMENT_FALSE = 0;
+
+
     /**
      * The attributes that are mass assignable.
      *
@@ -72,7 +76,9 @@ class Order extends Model
         'status',
         'statusGHTK',
         'statusGHTK_name',
-        'label_GHTK'
+        'label_GHTK',
+        'estimated_deliver',
+        'need_treatment'
     ];
 
     public function products()

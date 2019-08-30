@@ -12,7 +12,7 @@ class OrderController extends Controller
     {
         $ordersSuccess = Order::where('statusGHTK', 5)->count();
 
-        $ordersShipping = Order::where('statusGHTK', 4)->count();
+        $ordersShipping = Order::whereIn('statusGHTK', [4, 2])->count();
 
         $ordersReturning = Order::where('statusGHTK', 20)->count();
 
@@ -58,7 +58,31 @@ class OrderController extends Controller
         $query = new Order;
         if ($_GET) {
             if (isset($_GET['type_not_ghtk'])) {
-                $query = $query ->where('label_GHTK', '=', null);
+                $query = $query->where('label_GHTK', '=', null);
+            }
+        }
+
+        if ($_GET) {
+            if (isset($_GET['template-type'])) {
+                if ($_GET['template-type'] == 'success') {
+                    $query = $query->where('statusGHTK', 5);
+                }
+
+                if ($_GET['template-type'] == 'shipping') {
+                    $query = $query->whereIn('statusGHTK', [4, 2]);
+                }
+
+                if ($_GET['template-type'] == 'transferring') {
+                    $query = $query->where('statusGHTK', 20);
+                }
+
+                if ($_GET['template-type'] == 'completed') {
+                    $query = $query->where('statusGHTK', 21);
+                }
+
+                if ($_GET['template-type'] == 'NeedTreatment') {
+                    $query = $query->where('statusGHTK', 10);
+                }
             }
         }
         $query = $query->latest()->paginate($numberPage);
@@ -171,8 +195,9 @@ class OrderController extends Controller
                                 'weight'   => $product->weight,
                             ];
                         }
-                        $orderSaveDB->products = json_encode($products_id);
-                        $orderSaveDB->status   = Order::STATUS_NEW_CREATEED;
+                        $orderSaveDB->products       = json_encode($products_id);
+                        $orderSaveDB->status         = Order::STATUS_NEW_CREATEED;
+                        $orderSaveDB->need_treatment = Order::STATUS_NEED_TREATMENT_FALSE;
                         $orderSaveDB->save();
 
                         $responseFrontEnd[] = [
