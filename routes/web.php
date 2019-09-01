@@ -50,3 +50,7 @@ Route::post('/api/sort-order/keyword', 'SortOrderController@sortByKeyList');
 
 //singleOrder
 Route::get('/order/{id}', 'OrderController@singleOrder')->name('single-order');
+
+
+//reset order
+Route::get('reset-order', 'OrderController@resetStatusOrder');

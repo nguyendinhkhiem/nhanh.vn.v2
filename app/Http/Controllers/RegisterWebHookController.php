@@ -76,7 +76,12 @@ class RegisterWebHookController extends Controller
         $data = $request->all();
         Log::info($data);
         $orderGhtk  = Deliverys::where('label', $data['label_id'])->update(['status_id' => $data['status_id']]);
-        $orderNhanh = Order::where('label_GHTK', $data['label_id'])->update(['statusGHTK' => $data['status_id']]);
+        $orderNhanh = Order::where('label_GHTK', $data['label_id'])->update(
+            [
+                'statusGHTK' => $data['status_id'],
+                'need_treatment' => 0
+            ]
+        );
         Log::info($orderGhtk);
         Log::info($orderNhanh);
         return response()->json(['success' => true]);
