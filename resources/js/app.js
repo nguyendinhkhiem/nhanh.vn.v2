@@ -167,7 +167,7 @@ $(document).ready(function() {
                             }
                         }
                         $('.loading').removeClass('active')
-                    }else{
+                    } else {
                         alert('Không tìm thấy kết!')
                         $('.loading').removeClass('active')
                     }
@@ -644,7 +644,7 @@ $(document).ready(function() {
         }
     });
 
-    function cancleGHTK(){
+    function cancleGHTK() {
         var array_id_ghtk_new = [];
         $('#search_list_order_clone .cancle_ghtk').click(function(e) {
             e.preventDefault();
@@ -655,7 +655,7 @@ $(document).ready(function() {
 
             $('#exampleModalCancleGHTK').modal('show');
 
-            $('#comfrim-cancle').click(function(e){
+            $('#comfrim-cancle').click(function(e) {
                 $('#exampleModalCancleGHTK').modal('hide');
                 $('.loading').addClass('active');
                 window.axios.post('/cancle-order-ghtk', {
@@ -684,18 +684,41 @@ $(document).ready(function() {
                     });
             });
 
-            $('#comfrim-close').click(function(e){
-                 e.preventDefault();
-                 array_id_ghtk_new = []
-                 $('#exampleModalCancleGHTK').modal('hide');
+            $('#comfrim-close').click(function(e) {
+                e.preventDefault();
+                array_id_ghtk_new = []
+                $('#exampleModalCancleGHTK').modal('hide');
             })
         })
     }
 
     cancleGHTK();
 
-    $('.update_status_order').click(function(e){
+    $('.update_status_order').click(function(e) {
         e.preventDefault();
         $('#exampleModalLyDo').modal('show');
+        var order_id = $(this).attr('data-id');
+        $('#submit_update_order').click(function(e) {
+            e.preventDefault();
+            var thought = $("#exampleFormControlLyDo").val();
+            console.log(order_id);
+            if (thought && thought.length) {
+                window.axios.post('/create-cause', {
+                        content: thought,
+                        order_id: order_id
+                    })
+                    .then(function(response) {
+                        console.log('response ', response)
+                    })
+                    .catch(function(error) {
+                        console.log(error);
+                    })
+                    .finally(function() {
+                        // always executed
+                    });
+            } else {
+                alert('Bạn cần nhập nội dung');
+            }
+        });
     })
 })

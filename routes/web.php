@@ -54,3 +54,6 @@ Route::get('/order/{id}', 'OrderController@singleOrder')->name('single-order');
 
 //reset order
 Route::get('reset-order', 'OrderController@resetStatusOrder');
+
+// create cause
+Route::post('/create-cause', 'OrderController@createCause');

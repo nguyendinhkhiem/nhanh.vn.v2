@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 use App\Entities\Information;
 use App\Entities\Order;
 use App\Entities\Product;
+use App\Entities\Cause;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
@@ -448,5 +450,16 @@ class OrderController extends Controller
 
         var_dump('oke');
         die();
+    }
+
+    public function createCause(Request $request)
+    {
+        $data = $request->all();
+        $order_update = Order::where('id', $data['order_id'])->update(['need_treatment' => Order::STATUS_NEED_TREATMENT_TRUE]);
+        $cause = new Cause;
+        $cause->order_id = $data['order_id'];
+        $cause->content  = $data['content'];
+        $cause->save();
+        return response()->json(['success' => true]);
     }
 }
