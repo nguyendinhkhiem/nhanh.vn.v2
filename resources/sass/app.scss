@@ -8,6 +8,22 @@
 @import '~bootstrap/scss/bootstrap';
 
 
+.need_treatment_order {
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 50px;
+
+    .update_status_order {
+        background: #e23b3b;
+        color: #fff;
+        border-radius: 5px;
+        padding: 10px;
+        cursor: pointer;
+        font-size: 20px;
+        font-weight: 700;
+    }
+}
+
 .page_search_orders {
     #search_order {
         width: 60%;

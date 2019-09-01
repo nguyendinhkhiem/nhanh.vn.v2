@@ -37425,6 +37425,10 @@ $(document).ready(function () {
   }
 
   cancleGHTK();
+  $('.update_status_order').click(function (e) {
+    e.preventDefault();
+    $('#exampleModalLyDo').modal('show');
+  });
 });
 
 /***/ }),

@@ -85,6 +85,7 @@ class OrderController extends Controller
                 }
             }
         }
+        $query = $query->where('need_treatment', 0);
         $query = $query->latest()->paginate($numberPage);
 
         $info = Information::get();
@@ -433,5 +434,19 @@ class OrderController extends Controller
             }
             curl_close($curl);
         }
+    }
+
+    public function resetStatusOrder()
+    {
+        $orders = Order::get();
+
+        foreach ($orders as $key => $item) {
+            $orderUpdate = Order::where('id', $item->id)->update([
+                'need_treatment' => 0
+            ]);
+        }
+
+        var_dump('oke');
+        die();
     }
 }
