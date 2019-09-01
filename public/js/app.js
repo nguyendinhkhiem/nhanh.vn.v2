@@ -37428,6 +37428,26 @@ $(document).ready(function () {
   $('.update_status_order').click(function (e) {
     e.preventDefault();
     $('#exampleModalLyDo').modal('show');
+    var order_id = $(this).attr('data-id');
+    $('#submit_update_order').click(function (e) {
+      e.preventDefault();
+      var thought = $("#exampleFormControlLyDo").val();
+      console.log(order_id);
+
+      if (thought && thought.length) {
+        window.axios.post('/create-cause', {
+          content: thought,
+          order_id: order_id
+        }).then(function (response) {
+          console.log('response ', response);
+        })["catch"](function (error) {
+          console.log(error);
+        })["finally"](function () {// always executed
+        });
+      } else {
+        alert('Bạn cần nhập nội dung');
+      }
+    });
   });
 });
 
@@ -37509,8 +37529,8 @@ if (token) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/nguyenkhiem/Works/Projects/Laravel/nhanh_vn/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Users/nguyenkhiem/Works/Projects/Laravel/nhanh_vn/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! E:\xampp\htdocs\nhanh.vn.v2\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! E:\xampp\htdocs\nhanh.vn.v2\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
