@@ -132,6 +132,8 @@ class OrderController extends Controller
 
         if (curl_error($curl) == "") {
             $response = json_decode($curlResult);
+            var_dump($response);
+            die();
             if ($response->code == 1) {
 
                 $responseFrontEnd = [];
@@ -460,6 +462,9 @@ class OrderController extends Controller
         $cause->order_id = $data['order_id'];
         $cause->content  = $data['content'];
         $cause->save();
-        return response()->json(['success' => true]);
+
+        
+
+        return response()->json(['success' => true, 'messages' => 'Bạn đã xử lý thành công']);
     }
 }
