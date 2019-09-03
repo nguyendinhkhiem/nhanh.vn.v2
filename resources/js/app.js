@@ -697,28 +697,32 @@ $(document).ready(function() {
     $('.update_status_order').click(function(e) {
         e.preventDefault();
         $('#exampleModalLyDo').modal('show');
-        var order_id = $(this).attr('data-id');
-        $('#submit_update_order').click(function(e) {
-            e.preventDefault();
-            var thought = $("#exampleFormControlLyDo").val();
-            console.log(order_id);
-            if (thought && thought.length) {
-                window.axios.post('/create-cause', {
-                        content: thought,
-                        order_id: order_id
-                    })
-                    .then(function(response) {
-                        console.log('response ', response)
-                    })
-                    .catch(function(error) {
-                        console.log(error);
-                    })
-                    .finally(function() {
-                        // always executed
-                    });
-            } else {
-                alert('Bạn cần nhập nội dung');
-            }
-        });
     })
+    $('#submit_update_order').click(function(e) {
+        e.preventDefault();
+        $('.loading').addClass('active');
+        var order_id = $('.update_status_order').attr('data-id');
+        var thought = $("#exampleFormControlLyDo").val();
+        console.log(order_id);
+        if (thought && thought.length) {
+            window.axios.post('/create-cause', {
+                    content: thought,
+                    order_id: order_id
+                })
+                .then(function(response) {
+                    if(response.data.success == true){
+                        alert(response.data.messages);
+                    }
+                    $('.loading').removeClass('active');
+                })
+                .catch(function(error) {
+                    console.log(error);
+                })
+                .finally(function() {
+                    // always executed
+                });
+        } else {
+            alert('Bạn cần nhập nội dung');
+        }
+    });
 })
