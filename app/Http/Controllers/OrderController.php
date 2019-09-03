@@ -132,8 +132,7 @@ class OrderController extends Controller
 
         if (curl_error($curl) == "") {
             $response = json_decode($curlResult);
-            var_dump($response);
-            die();
+            
             if ($response->code == 1) {
 
                 $responseFrontEnd = [];
