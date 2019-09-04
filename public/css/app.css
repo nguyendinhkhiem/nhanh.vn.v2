@@ -10666,7 +10666,6 @@ a.text-dark:focus {
   padding: 10px;
   cursor: pointer;
   font-size: 20px;
-  font-weight: 700;
 }
 
 .page_search_orders #search_order {
@@ -10690,6 +10689,7 @@ a.text-dark:focus {
   padding: 13px 10px 0px 20px;
   display: flex;
   justify-content: space-between;
+  border-radius: 5px 0 0 5px;
 }
 
 .page_search_orders #search_order .choice_type_search .type_current_order .icon {
@@ -10763,6 +10763,8 @@ a.text-dark:focus {
   border: 1px solid transparent;
   font-size: 18px;
   color: #fff;
+  padding: 0 10px;
+  border-radius: 0 5px 5px 0;
 }
 
 .page_search_orders .categoris_order .list {
@@ -10785,7 +10787,7 @@ a.text-dark:focus {
 }
 
 .page_search_orders .categoris_order .list .Success {
-  background: #3490dc;
+  background: #4ac54a;
 }
 
 .page_search_orders .categoris_order .list .Success a {
@@ -10793,7 +10795,7 @@ a.text-dark:focus {
 }
 
 .page_search_orders .categoris_order .list .Shipping {
-  background: #4ac54a;
+  background: #3490dc;
 }
 
 .page_search_orders .categoris_order .list .Shipping a {
@@ -10809,7 +10811,7 @@ a.text-dark:focus {
 }
 
 .page_search_orders .categoris_order .list .Completed {
-  background: #3490dc;
+  background: #921f74;
 }
 
 .page_search_orders .categoris_order .list .Completed a {
@@ -10821,6 +10823,14 @@ a.text-dark:focus {
 }
 
 .page_search_orders .categoris_order .list .NeedTreatment a {
+  color: #fff;
+}
+
+.page_search_orders .categoris_order .list .Canceled {
+  background: #6d6a6a;
+}
+
+.page_search_orders .categoris_order .list .Canceled a {
   color: #fff;
 }
 
@@ -10937,6 +10947,7 @@ a.text-dark:focus {
   padding: 13px 10px 0px 20px;
   display: flex;
   justify-content: space-between;
+  border-radius: 5px 0 0 5px;
 }
 
 #search_order_list .choice_type_search .type_current_order .icon,
@@ -11070,6 +11081,8 @@ a.text-dark:focus {
   border: 1px solid transparent;
   font-size: 18px;
   color: #fff;
+  padding: 0 10px;
+  border-radius: 0 5px 5px 0;
 }
 
 .header_order {
@@ -11112,6 +11125,7 @@ a.text-dark:focus {
   padding: 13px 10px 0px 20px;
   display: flex;
   justify-content: space-between;
+  border-radius: 5px 0 0 5px;
 }
 
 .header_order .search_order #search_order_list_info .choice_type_search .type_current_order .icon {
@@ -11169,6 +11183,8 @@ a.text-dark:focus {
   border: 1px solid transparent;
   font-size: 18px;
   color: #fff;
+  padding: 0 10px;
+  border-radius: 0 5px 5px 0;
 }
 
 .header_order .template-type {

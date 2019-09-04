@@ -43,7 +43,6 @@
         padding: 10px;
         cursor: pointer;
         font-size: 20px;
-        font-weight: 700;
     }
 }
 
@@ -67,6 +66,7 @@
                 padding: 13px 10px 0px 20px;
                 display: flex;
                 justify-content: space-between;
+                border-radius: 5px 0 0 5px;
 
                 .icon {
                     padding-top: 10px;
@@ -147,6 +147,8 @@
                 border: 1px solid transparent;
                 font-size: 18px;
                 color: #fff;
+                padding: 0 10px;
+                border-radius: 0 5px 5px 0;
             }
         }
     }
@@ -171,7 +173,7 @@
             }
 
             .Success {
-                background: #3490dc;
+                background: #4ac54a;
 
                 a {
                     color: #fff;
@@ -179,7 +181,7 @@
             }
 
             .Shipping {
-                background: #4ac54a;
+                background: #3490dc;
 
                 a {
                     color: #fff;
@@ -195,7 +197,7 @@
             }
 
             .Completed {
-                background: #3490dc;
+                background: #921f74;
 
                 a {
                     color: #fff;
@@ -204,6 +206,14 @@
 
             .NeedTreatment {
                 background: #e24343;
+
+                a {
+                    color: #fff;
+                }
+            }
+
+            .Canceled {
+                background: #6d6a6a;
 
                 a {
                     color: #fff;
@@ -322,6 +332,7 @@
             padding: 13px 10px 0px 20px;
             display: flex;
             justify-content: space-between;
+            border-radius: 5px 0 0 5px;
 
             .icon {
                 padding-top: 10px;
@@ -402,6 +413,8 @@
             border: 1px solid transparent;
             font-size: 18px;
             color: #fff;
+            padding: 0 10px;
+            border-radius: 0 5px 5px 0;
         }
     }
 }
@@ -451,6 +464,7 @@
                     padding: 13px 10px 0px 20px;
                     display: flex;
                     justify-content: space-between;
+                    border-radius: 5px 0 0 5px;
 
                     .icon {
                         padding-top: 9px;
@@ -510,6 +524,8 @@
                     border: 1px solid transparent;
                     font-size: 18px;
                     color: #fff;
+                    padding: 0 10px;
+                    border-radius: 0 5px 5px 0;
                 }
             }
         }

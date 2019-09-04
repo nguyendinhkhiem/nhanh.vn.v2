@@ -21,6 +21,9 @@ class OrderController extends Controller
         $ordersReturned = Order::where('statusGHTK', 21)->count();
 
         $ordersCanXuLy = Order::whereIn('statusGHTK', [9, 10])->where('need_treatment', 0)->count();
+
+        $ordersCanceled = Order::where('statusGHTK', -1)->count();
+
         $info          = Information::get();
 
         $data = [
@@ -29,6 +32,7 @@ class OrderController extends Controller
             'ordersReturning' => $ordersReturning,
             'ordersReturned'  => $ordersReturned,
             'ordersCanXuLy'   => $ordersCanXuLy,
+            'ordersCanceled'  => $ordersCanceled,
             'info'            => $info,
         ];
 
@@ -87,6 +91,10 @@ class OrderController extends Controller
 
                 if ($_GET['template-type'] == 'NeedTreatment') {
                     $query = $query->whereIn('statusGHTK', [9, 10]);
+                }
+
+                if ($_GET['template-type'] == 'Canceled') {
+                    $query = $query->where('statusGHTK', -1);
                 }
             }
         }

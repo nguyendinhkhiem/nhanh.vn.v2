@@ -131,13 +131,13 @@
 				    <thead>
 				        <tr>
 				            <th scope="col"><input type="checkbox" name="choice_all" id="choice_all"></th>
-				            <th scope="col">Mã ĐH</th>
-				            <th scope="col">Mã Đơn GHTK</th>
-				            <th scope="col">Khách Hàng</th>
+				            <th scope="col">Mã đơn Nhanh</th>
+				            <th scope="col">Mã đơn GHTK</th>
+				            <th scope="col">Khách hàng</th>
 				            <th scope="col">Số điện thoại</th>
-				            <th scope="col">Sản Phẩm</th>
+				            <th scope="col">Sản phẩm</th>
 				            <th scope="col">Tổng tiền</th>
-				            <th scope="col">Trạng thái đơn hàng nhanh</th>
+				            <th scope="col">Trạng thái đơn NHANH</th>
 				            <th scope="col">Trạng thái GHTK</th>
 				            <th scope="col">Thao tác</th>
 				        </tr>
@@ -166,8 +166,8 @@
 								<td>{{ $item->customerName }}</td>
 								<td>{{ $item->customerMobile }}</td>
 								<td>{!! $nameProducts !!}</td>
-								<td>{{ $item->calcTotalMoney }}</td>
-								{{-- <td>{{ $item->statusName }}</td> --}}
+								<td>{{ number_format($item->calcTotalMoney, 0, ',', '.') }}</td>
+								<td>{{ $item->statusName }}</td>
 								{{-- <td>{{ $item->statusGHTK }}</td> --}}
 								<td>
 									@if ($item->statusGHTK == '-1')
@@ -253,7 +253,7 @@
 			</div>
 		@else
 			<div>
-				Chưa có đơn hàng nào!
+				Làm đéo gì có đơn mà quản lý, cố mà bán hàng đi!
 			</div>
 		@endif
 	</div>
