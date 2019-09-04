@@ -1,5 +1,5 @@
 // Fonts
-@import url('https://fonts.googleapis.com/css?family=Nunito');
+@import url('https://fonts.googleapis.com/css?family=Roboto');
 
 // Variables
 @import 'variables';
@@ -147,7 +147,6 @@
                 border: 1px solid transparent;
                 font-size: 18px;
                 color: #fff;
-                font-weight: bold;
             }
         }
     }
@@ -293,7 +292,6 @@
 
             a {
                 font-size: 20px;
-                font-weight: 600;
             }
         }
     }
@@ -404,7 +402,6 @@
             border: 1px solid transparent;
             font-size: 18px;
             color: #fff;
-            font-weight: bold;
         }
     }
 }
@@ -513,7 +510,6 @@
                     border: 1px solid transparent;
                     font-size: 18px;
                     color: #fff;
-                    font-weight: bold;
                 }
             }
         }
@@ -641,5 +637,5 @@
 }
 
 .Danggiao{
-    color: #f00;
+    color: #3490dc;
 }

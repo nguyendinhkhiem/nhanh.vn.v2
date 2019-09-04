@@ -34,7 +34,7 @@
 				<input type="number" value="" name="search_order_input" id="search_order_input" placeholder="Nhập thông tin">
 			</div>
 			<div class="button_submit">
-				<input type="submit" name="submit_search_orders">
+				<input type="submit" name="submit_search_orders" value="Tìm kiếm">
 			</div>
 		</form>
 
@@ -83,7 +83,7 @@
 					            @endforeach
 					        </select>
 					    </div>
-					    <button type="submit" class="btn btn-primary">Đăng Ký Đơn lên GHTK</button>
+					    <button type="submit" class="btn btn-primary">Đăng đơn lên GHTK</button>
 					</form>
 				</div>
 			</div>
@@ -91,13 +91,13 @@
 			    <thead>
 			        <tr>
 			            <th scope="col"><input type="checkbox" name="choice_all" id="choice_all"></th>
-			            <th scope="col">#</th>
+			            <th scope="col">STT</th>
 			            <th scope="col">Mã ĐH</th>
 			            <th scope="col">Ngày tạo</th>
-			            <th scope="col">Khách Hàng</th>
+			            <th scope="col">Khách hàng</th>
 			            <th scope="col">Số điện thoại</th>
 			            <th scope="col">Trạng thái đơn hàng nhanh</th>
-			            <th scope="col">Sản Phẩm</th>
+			            <th scope="col">Sản phẩm</th>
 			            <th scope="col">Tổng tiền</th>
 			            <th scope="col">Trạng thái Search</th>
 			        </tr>

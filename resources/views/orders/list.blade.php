@@ -75,7 +75,7 @@
 						</p>
 						<ul class="list">
 							<li class="item" data-type="id_nhanhvn">
-								ID Order Nhanh.vn
+								ID Đơn Hàng Nhanh.vn
 							</li>
 							<li class="item" data-type="label_GHTK">
 								ID Giao Hàng Tiết Kiệm
@@ -108,7 +108,7 @@
 				            @endforeach
 				        </select>
 				    </div>
-				    <button type="submit" class="btn btn-primary">Đăng Ký Đơn lên GHTK</button>
+				    <button type="submit" class="btn btn-primary">Đăng đơn lên GHTK</button>
 				</form>
 			</div>
 
@@ -167,7 +167,7 @@
 								<td>{{ $item->customerMobile }}</td>
 								<td>{!! $nameProducts !!}</td>
 								<td>{{ $item->calcTotalMoney }}</td>
-								<td>{{ $item->statusName }}</td>
+								{{-- <td>{{ $item->statusName }}</td> --}}
 								{{-- <td>{{ $item->statusGHTK }}</td> --}}
 								<td>
 									@if ($item->statusGHTK == '-1')
@@ -207,6 +207,8 @@
 					    @endforeach
 				    </tbody>
 				</table>
+
+				<!-- Footer -->
 				<div class="list_footer">
 					<div class="number_show_order">
 						<div class="current_numberPage">
@@ -251,27 +253,29 @@
 			</div>
 		@else
 			<div>
-				Chưa có order!
+				Chưa có đơn hàng nào!
 			</div>
 		@endif
 	</div>
+
+	<!-- Form hủy đơn GHTK -->
 	<div class="modal fade" id="exampleModalCancleGHTK" tabindex="-1" role="dialog" aria-labelledby="exampleModalCancleGHTKLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                Bạn có đồng ý huỷ đơn hàng trên GHTK
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal" id="comfrim-close">Close</button>
-                <button type="button" class="btn btn-primary" id="comfrim-cancle">Đồng Ý</button>
-            </div>
-        </div>
-    </div>
-</div>
+	    <div class="modal-dialog" role="document">
+	        <div class="modal-content">
+	            <div class="modal-header">
+	                <h5 class="modal-title" id="exampleModalLabel">Hủy đơn hàng đã đăng lên GHTK</h5>
+	                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	                    <span aria-hidden="true">&times;</span>
+	                </button>
+	            </div>
+	            <div class="modal-body">
+	                Bạn có đồng ý huỷ đơn hàng trên GHTK
+	            </div>
+	            <div class="modal-footer">
+	                <button type="button" class="btn btn-secondary" data-dismiss="modal" id="comfrim-close">Đóng</button>
+	                <button type="button" class="btn btn-primary" id="comfrim-cancle">Đồng ý</button>
+	            </div>
+	        </div>
+	    </div>
+	</div>
 @endsection
