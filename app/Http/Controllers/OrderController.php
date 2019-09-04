@@ -12,9 +12,9 @@ class OrderController extends Controller
 {
     public function index()
     {
-        $ordersSuccess = Order::where('statusGHTK', 5)->count();
+        $ordersSuccess = Order::whereIn('statusGHTK', [5, 6])->count();
 
-        $ordersShipping = Order::whereIn('statusGHTK', [4, 2])->count();
+        $ordersShipping = Order::whereIn('statusGHTK', [2, 3, 4])->count();
 
         $ordersReturning = Order::where('statusGHTK', 20)->count();
 

@@ -171,7 +171,7 @@
 								{{-- <td>{{ $item->statusGHTK }}</td> --}}
 								<td>
 									@if ($item->statusGHTK == '-1')
-										Đã Huỷ
+										Đã huỷ
 									@endif
 
 									@if ($item->statusGHTK == '4' || $item->statusGHTK == '3'|| $item->statusGHTK == '2')
