@@ -7,6 +7,25 @@
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 
+.Thanhcong{
+    color: #4ac54a;
+}
+.Dangchuyen{
+    color: #3490dc;
+}
+.Dangchuyenhoan{
+    color: #fb9307;
+}
+.Dahoan{
+    color: #921f74;
+}
+.Canxuly{
+    color: #e24343;
+}
+.Dahuy{
+    color: #6d6a6a;
+}
+
 
 .list_causes {
     padding: 0px 100px;
@@ -650,8 +669,4 @@
         cursor: pointer;
         color: red;
     }
-}
-
-.Danggiao{
-    color: #3490dc;
 }
