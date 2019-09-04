@@ -2,36 +2,38 @@
 
 @section('content')
 	<div class="single_order">
-		<div class="need_treatment_order">
-			@if ($order->statusGHTK == 9 || $order->statusGHTK == 10)
-				<div class="update_status_order" data-id="{{ $order->id }}">
-					Đã xử lý
-				</div>
-				<!-- Modal -->
-				<div class="modal fade" id="exampleModalLyDo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-				    <div class="modal-dialog" role="document">
-				        <div class="modal-content">
-				            <div class="modal-header">
-				                <h5 class="modal-title" id="exampleModalLabel">Conten</h5>
-				                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-				                    <span aria-hidden="true">&times;</span>
-				                </button>
-				            </div>
-				            <div class="modal-body">
-				            	<div class="form-group">
-								    <label for="exampleFormControlLyDo">Content</label>
-								    <textarea class="form-control" id="exampleFormControlLyDo" rows="3"></textarea>
-								  </div>
-				            </div>
-				            <div class="modal-footer">
-				                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-				                <button type="button" id="submit_update_order" class="btn btn-primary">Save changes</button>
-				            </div>
-				        </div>
-				    </div>
+			@if ($order->need_treatment == 0)
+			<div class="need_treatment_order">
+				@if ($order->statusGHTK == 9 || $order->statusGHTK == 10)
+					<div class="update_status_order" data-id="{{ $order->id }}">
+						Đã xử lý
+					</div>
+					<!-- Modal -->
+					<div class="modal fade" id="exampleModalLyDo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+					    <div class="modal-dialog" role="document">
+					        <div class="modal-content">
+					            <div class="modal-header">
+					                <h5 class="modal-title" id="exampleModalLabel">Conten</h5>
+					                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					                    <span aria-hidden="true">&times;</span>
+					                </button>
+					            </div>
+					            <div class="modal-body">
+					            	<div class="form-group">
+									    <label for="exampleFormControlLyDo">Content</label>
+									    <textarea class="form-control" id="exampleFormControlLyDo" rows="3"></textarea>
+									  </div>
+					            </div>
+					            <div class="modal-footer">
+					                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					                <button type="button" id="submit_update_order" class="btn btn-primary">Save changes</button>
+					            </div>
+					        </div>
+					    </div>
+					</div>
+				@endif
 				</div>
 			@endif
-		</div>
 		<div class="infomation">
 			<div class="info-order">
 				<ul>
@@ -94,5 +96,30 @@
 			    <tfoot></tfoot>
 			</table>
 		</div>
+		@if ($causes->count() > 0)
+			<div class="list_causes">
+				<p class="title">
+					Lịch sử xử lý
+				</p>
+				<table class="table table-dark">
+				    <thead>
+				        <tr>
+				            <th scope="col">#</th>
+				            <th scope="col">Content</th>
+				            <th scope="col">Thời gian</th>
+				        </tr>
+				    </thead>
+				    <tbody>
+				    	@foreach ($causes as $key => $item)
+							<tr>
+					            <th scope="row">{{ $key + 1 }}</th>
+					            <td>{{ $item->content }}</td>
+					            <td>{{ $item->created_at }}</td>
+					        </tr>
+						@endforeach
+				    </tbody>
+				</table>
+			</div>
+		@endif
 	</div>
 @endsection

@@ -10644,6 +10644,15 @@ a.text-dark:focus {
   }
 }
 
+.list_causes {
+  padding: 0px 100px;
+}
+
+.list_causes .title {
+  font-size: 25px;
+  font-weight: 700;
+}
+
 .need_treatment_order {
   display: flex;
   justify-content: flex-end;

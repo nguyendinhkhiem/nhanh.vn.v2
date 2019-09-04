@@ -710,8 +710,9 @@ $(document).ready(function() {
                     order_id: order_id
                 })
                 .then(function(response) {
-                    if(response.data.success == true){
+                    if (response.data.success == true) {
                         alert(response.data.messages);
+                        window.location.href = window.location.href;
                     }
                     $('.loading').removeClass('active');
                 })

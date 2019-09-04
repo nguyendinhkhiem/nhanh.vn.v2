@@ -20,7 +20,7 @@ class OrderController extends Controller
 
         $ordersReturned = Order::where('statusGHTK', 21)->count();
 
-        $ordersCanXuLy = Order::where('statusGHTK', 10)->count();
+        $ordersCanXuLy = Order::whereIn('statusGHTK', [9, 10])->where('need_treatment', 0)->count();
         $info          = Information::get();
 
         $data = [
@@ -41,9 +41,12 @@ class OrderController extends Controller
 
         $products = Product::where('order_id', $id)->get();
 
+        $causes = Cause::where('order_id', $id)->orderBy('created_at', 'desc')->get();
+
         $data = [
             'order'    => $order,
             'products' => $products,
+            'causes' => $causes
         ];
 
         return view('orders.singleOrder', $data);
@@ -83,7 +86,7 @@ class OrderController extends Controller
                 }
 
                 if ($_GET['template-type'] == 'NeedTreatment') {
-                    $query = $query->where('statusGHTK', 10);
+                    $query = $query->whereIn('statusGHTK', [9, 10]);
                 }
             }
         }

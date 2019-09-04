@@ -8,6 +8,29 @@
 @import '~bootstrap/scss/bootstrap';
 
 
+.list_causes {
+    padding: 0px 100px;
+
+    .title {
+        font-size: 25px;
+        font-weight: 700;
+    }
+
+    // .list {
+    //     padding: 0;
+    //     margin-bottom: 0;
+
+    //     .item {
+    //         display: flex;
+
+    //         .content_causes {
+    //             margin-right: 30px;
+    //             font-size: 16px;
+    //         }
+    //     }
+    // }
+}
+
 .need_treatment_order {
     display: flex;
     justify-content: flex-end;
