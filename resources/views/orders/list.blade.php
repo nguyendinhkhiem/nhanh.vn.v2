@@ -171,15 +171,15 @@
 								{{-- <td>{{ $item->statusGHTK }}</td> --}}
 								<td>
 									@if ($item->statusGHTK == '-1')
-										Đã huỷ
+										<span class="Dahuy">Đã huỷ</span>
 									@endif
 
 									@if ($item->statusGHTK == '4' || $item->statusGHTK == '3'|| $item->statusGHTK == '2')
-										<span class="Danggiao">Đang giao hàng</span>
+										<span class="Dangchuyen">Đang giao hàng</span>
 									@endif
 
 									@if ($item->statusGHTK == '5' || $item->statusGHTK == '6')
-										Thành công
+										<span class="Thanhcong">Thành công</span>
 									@endif
 
 									@if ($item->statusGHTK == '9' || $item->statusGHTK == '10')
@@ -187,11 +187,11 @@
 									@endif
 
 									@if ($item->statusGHTK == '20')
-										Đang chuyển hoàn
+										<span class="Dangchuyenhoan">Đang chuyển hoàn</span>
 									@endif
 
 									@if ($item->statusGHTK == '21')
-										Đã hoàn
+										<span class="Dahoan">Đã hoàn</span>
 									@endif
 								</td>
 								@if($item->label_GHTK != null)
