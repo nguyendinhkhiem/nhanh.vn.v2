@@ -174,16 +174,16 @@
 										Đã Huỷ
 									@endif
 
-									@if ($item->statusGHTK == '4' || $item->statusGHTK == '2')
-										Đang shipping
+									@if ($item->statusGHTK == '4' || $item->statusGHTK == '3'|| $item->statusGHTK == '2')
+										<span class="Danggiao">Đang giao hàng</span>
 									@endif
 
-									@if ($item->statusGHTK == '5')
-										Thành Công
+									@if ($item->statusGHTK == '5' || $item->statusGHTK == '6')
+										Thành công
 									@endif
 
-									@if ($item->statusGHTK == '10')
-										Cần xử lý
+									@if ($item->statusGHTK == '9' || $item->statusGHTK == '10')
+										<span class="Canxuly">Cần xử lý</span>
 									@endif
 
 									@if ($item->statusGHTK == '20')
@@ -197,7 +197,7 @@
 								@if($item->label_GHTK != null)
 									<td>
 										@if ($item->statusGHTK != '-1')
-											<div class="cancle_ghtk" data-label="{{ $item->label_GHTK }}">Huỷ Đơn</div>
+											<div class="cancle_ghtk" data-label="{{ $item->label_GHTK }}">Huỷ đơn</div>
 										@endif
 									</td>
 								@else
