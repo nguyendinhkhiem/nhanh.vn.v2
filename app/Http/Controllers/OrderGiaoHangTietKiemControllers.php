@@ -58,7 +58,7 @@ class OrderGiaoHangTietKiemControllers extends Controller
                 "is_freeship"   => $data['params']['calcShip'],
                 "pick_date"     => $order->createdDateTime,
                 "pick_money"    => (int) $order->calcTotalMoney,
-                "note"          => $order->description . "<br> CHO XEM HÀNG nếu khách không nghe máy hoặc không nhận hàng thì gọi về báo shop không được tự ý hoàn đơn",
+                "note"          => $order->description . " - CHO XEM HÀNG nếu khách không nghe máy hoặc không nhận hàng thì gọi về báo shop không được tự ý hoàn đơn",
                 "value"         => 3000000,
                 "transport"     => "fly",
             ];
