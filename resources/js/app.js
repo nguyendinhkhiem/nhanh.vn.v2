@@ -713,6 +713,7 @@ $(document).ready(function() {
                     if (response.data.success == true) {
                         alert(response.data.messages);
                         window.location.href = window.location.href;
+                        
                     }
                     $('.loading').removeClass('active');
                 })
