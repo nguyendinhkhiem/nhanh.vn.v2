@@ -74,11 +74,11 @@ class OrderController extends Controller
         if ($_GET) {
             if (isset($_GET['template-type'])) {
                 if ($_GET['template-type'] == 'success') {
-                    $query = $query->where('statusGHTK', 5);
+                    $query = $query->whereIn('statusGHTK', [5, 6]);
                 }
 
                 if ($_GET['template-type'] == 'shipping') {
-                    $query = $query->whereIn('statusGHTK', [4, 2]);
+                    $query = $query->whereIn('statusGHTK', [2, 3, 4]);
                 }
 
                 if ($_GET['template-type'] == 'transferring') {
