@@ -86,7 +86,7 @@ class OrderController extends Controller
                 }
 
                 if ($_GET['template-type'] == 'NeedTreatment') {
-                    $query = $query->where('statusGHTK', 10);
+                    $query = $query->whereIn('statusGHTK', [9, 10]);
                 }
             }
         }
