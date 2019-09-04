@@ -69,6 +69,12 @@
 						Cần xử lý <span class="number">{{ $ordersCanXuLy }}</span>
 					</a>
 				</li>
+
+				<li class="item NeedTreatment Canceled">
+					<a href="{{ route('list-nhanh') }}/?template-type=Canceled">
+						Đã hủy <span class="number">{{ $ordersCanceled }}</span>
+					</a>
+				</li>
 			</ul>
 		</div>
 
