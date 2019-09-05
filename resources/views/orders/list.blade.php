@@ -135,9 +135,10 @@
 				            <th scope="col">Mã đơn GHTK</th>
 				            <th scope="col">Khách hàng</th>
 				            <th scope="col">Số điện thoại</th>
+				            <th scope="col">Địa chỉ</th>
 				            <th scope="col">Sản phẩm</th>
 				            <th scope="col">Tổng tiền</th>
-				            <th scope="col">Trạng thái đơn NHANH</th>
+				            <!-- <th scope="col">Trạng thái đơn NHANH</th> -->
 				            <th scope="col">Trạng thái GHTK</th>
 				            <th scope="col">Thao tác</th>
 				        </tr>
@@ -165,33 +166,33 @@
 								<td>{{ $item->label_GHTK }}</td>
 								<td>{{ $item->customerName }}</td>
 								<td>{{ $item->customerMobile }}</td>
+								<td>{{ $item->customerAddress }}</td>
 								<td>{!! $nameProducts !!}</td>
 								<td>{{ number_format($item->calcTotalMoney, 0, ',', '.') }}</td>
-								<td>{{ $item->statusName }}</td>
+								{{-- <td>{{ $item->statusName }}</td> --}}
 								{{-- <td>{{ $item->statusGHTK }}</td> --}}
 								<td>
 									@if ($item->statusGHTK == '-1')
 										<span class="Dahuy">Đã huỷ</span>
-									@endif
 
-									@if ($item->statusGHTK == '4' || $item->statusGHTK == '3'|| $item->statusGHTK == '2')
+									@elseif ($item->statusGHTK == '4' || $item->statusGHTK == '3'|| $item->statusGHTK == '2')
 										<span class="Dangchuyen">Đang giao hàng</span>
-									@endif
 
-									@if ($item->statusGHTK == '5' || $item->statusGHTK == '6')
+									@elseif ($item->statusGHTK == '5' || $item->statusGHTK == '6')
 										<span class="Thanhcong">Thành công</span>
-									@endif
 
-									@if ($item->statusGHTK == '9' || $item->statusGHTK == '10')
+									@elseif ($item->statusGHTK == '9' || $item->statusGHTK == '10')
 										<span class="Canxuly">Cần xử lý</span>
-									@endif
 
-									@if ($item->statusGHTK == '20')
+									@elseif ($item->statusGHTK == '20')
 										<span class="Dangchuyenhoan">Đang chuyển hoàn</span>
-									@endif
 
-									@if ($item->statusGHTK == '21')
+									@elseif ($item->statusGHTK == '21')
 										<span class="Dahoan">Đã hoàn</span>
+
+									@else
+										{{ $item->statusGHTK }}
+
 									@endif
 								</td>
 								@if($item->label_GHTK != null)
@@ -253,7 +254,7 @@
 			</div>
 		@else
 			<div>
-				Làm đéo gì có đơn mà quản lý, cố mà bán hàng đi!
+				Làm gì có đơn mà quản lý, cố gắng mà bán hàng đi nha!
 			</div>
 		@endif
 	</div>
