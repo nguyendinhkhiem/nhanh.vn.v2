@@ -161,7 +161,7 @@
 								<th scope="row">
 									<input class="item-order-nhanh" type="checkbox" name="order_id_nhanh" data-idNhanh="{{ $item->id_nhanhvn }}" data-status="{{ $item->statusCode }}">
 								</th>
-								<td><a href="{!! route('single-order', $item->id) !!}">{{ $item->id_nhanhvn }}</a></td>
+								<td><a href="{!! route('single-order', $item->id_nhanhvn) !!}">{{ $item->id_nhanhvn }}</a></td>
 								<td>{{ $item->label_GHTK }}</td>
 								<td>{{ $item->customerName }}</td>
 								<td>{{ $item->customerMobile }}</td>
