@@ -135,7 +135,8 @@
 				            <th scope="col">Mã đơn GHTK</th>
 				            <th scope="col">Khách hàng</th>
 				            <th scope="col">Số điện thoại</th>
-				            <th scope="col">Địa chỉ</th>
+				            <th scope="col">Tỉnh/Thành phố</th>
+				            <th scope="col">Quận/Huyện</th>
 				            <th scope="col">Sản phẩm</th>
 				            <th scope="col">Tổng tiền</th>
 				            <!-- <th scope="col">Trạng thái đơn NHANH</th> -->
@@ -166,7 +167,8 @@
 								<td>{{ $item->label_GHTK }}</td>
 								<td>{{ $item->customerName }}</td>
 								<td>{{ $item->customerMobile }}</td>
-								<td>{{ $item->customerAddress }}</td>
+								<td>{{ $item->customerCity }}</td>
+								<td>{{ $item->customerDistrict }}</td>
 								<td>{!! $nameProducts !!}</td>
 								<td>{{ number_format($item->calcTotalMoney, 0, ',', '.') }}</td>
 								{{-- <td>{{ $item->statusName }}</td> --}}
