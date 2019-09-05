@@ -41,7 +41,7 @@ class OrderController extends Controller
 
     public function singleOrder($id)
     {
-        $order = Order::where('id_nhanhvn', $id)->first();
+        $order = Order::where('id', $id)->first();
 
         $products = Product::where('order_id', $id)->get();
 
