@@ -257,7 +257,7 @@ class OrderController extends Controller
                 $dequyKetQua = [];
                 if ($response->data->totalPages > 1) {
                     $dequyKetQua = $this->searchDeQuy($response->data->totalPages, $response->data->page, $_GET['type'], $_GET['value']);
-                    var_dump($dequyKetQua);
+                    var_dump(json_decode($dequyKetQua));
                     die();
                 }
                 if ($dequyKetQua) {
