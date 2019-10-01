@@ -258,9 +258,10 @@ class OrderController extends Controller
                 if ($response->data->totalPages > 1) {
                     $dequyKetQua = $this->searchDeQuy($response->data->totalPages, $response->data->page, $_GET['type'], $_GET['value']);
                 }
-
                 if ($dequyKetQua) {
                     $sumResponse = array_merge($responseFrontEnd, json_decode($dequyKetQua));
+                    var_dump($dequyKetQua);
+                    die();
                     return json_encode($sumResponse);
                 } else {
                     return json_encode($responseFrontEnd);
@@ -323,8 +324,6 @@ class OrderController extends Controller
 
             if (curl_error($curl) == "") {
                 $response = json_decode($curlResult);
-                var_dump($response);
-                die();
                 if ($response->code == 1) {
 
                     $responseFrontEnd = [];
