@@ -260,9 +260,7 @@ class OrderController extends Controller
                     array_push($dequyKetQua, json_decode($dequyKetQuaBak));
                 }
                 if ($dequyKetQua) {
-                    var_dump($dequyKetQua);
-                    die();
-                    $sumResponse = array_merge($responseFrontEnd, $dequyKetQua);
+                    $sumResponse = array_merge($responseFrontEnd, $dequyKetQua[0]);
                     return json_encode($sumResponse);
                 } else {
                     return json_encode($responseFrontEnd);
