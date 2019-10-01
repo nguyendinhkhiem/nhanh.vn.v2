@@ -257,6 +257,8 @@ class OrderController extends Controller
                 $dequyKetQua = [];
                 if ($response->data->totalPages > 1) {
                     $dequyKetQuaBak = $this->searchDeQuy($response->data->totalPages, $response->data->page, $_GET['type'], $_GET['value']);
+                    var_dump($dequyKetQuaBak);
+                    die();
                     array_push($dequyKetQua, json_decode($dequyKetQuaBak));
                 }
                 if ($dequyKetQua) {
@@ -436,10 +438,8 @@ class OrderController extends Controller
                     if (($response->data->totalPages - $response->data->page) > 0) {
                         $dequyKetQua = $this->searchDeQuy($response->data->totalPages, $response->data->page, $_GET['type'], $_GET['value']);
 
-                        // $sumResponse = array_merge($responseFrontEnd, $dequyKetQua[0])
-                        var_dump($dequyKetQua);
-                        die();
-                        return $dequyKetQua;
+                        $sumResponse = array_merge($responseFrontEnd, json_decode($dequyKetQua));
+                        return $sumResponse;
                     } else {
                         return json_encode($responseFrontEnd);
                     }
