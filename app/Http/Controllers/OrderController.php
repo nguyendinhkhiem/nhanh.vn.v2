@@ -441,9 +441,6 @@ class OrderController extends Controller
                         $dequyKetQua = json_decode($dequyKetQua);
 
                         $sumResponse = array_merge($responseFrontEnd, $dequyKetQua);
-                        var_dump($sumResponse);
-                        die();
-                        return $sumResponse;
                     } else {
                         return json_encode($responseFrontEnd);
                     }
