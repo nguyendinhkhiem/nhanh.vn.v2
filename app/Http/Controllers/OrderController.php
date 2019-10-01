@@ -433,9 +433,10 @@ class OrderController extends Controller
                         }
                     }
 
-                    $dequyKetQua = [];
+                    // $dequyKetQua = [];
                     if (($response->data->totalPages - $response->data->page) > 0) {
                         $dequyKetQua = $this->searchDeQuy($response->data->totalPages, $response->data->page, $_GET['type'], $_GET['value']);
+                        return $dequyKetQua;
                     } else {
                         return json_encode($responseFrontEnd);
                     }
