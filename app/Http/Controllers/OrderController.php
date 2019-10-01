@@ -438,7 +438,11 @@ class OrderController extends Controller
                     if (($response->data->totalPages - $response->data->page) > 0) {
                         $dequyKetQua = $this->searchDeQuy($response->data->totalPages, $response->data->page, $_GET['type'], $_GET['value']);
 
-                        $sumResponse = array_push($responseFrontEnd, $dequyKetQua);
+                        $dequyKetQua = json_decode($dequyKetQua);
+                        var_dump($dequyKetQua);
+                        die();
+
+                        $sumResponse = array_merge($responseFrontEnd, $dequyKetQua);
                         return $sumResponse;
                     } else {
                         return json_encode($responseFrontEnd);
