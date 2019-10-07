@@ -147,8 +147,6 @@ class OrderController extends Controller
             
             if ($response->code == 1) {
 
-                $responseFrontEnd = [];
-
                 foreach ($response->data->orders as $key => $order) {
                     $orderDB = Order::where('id_nhanhvn', $order->id)->get();
                     if ($orderDB->isEmpty()) {
@@ -216,7 +214,7 @@ class OrderController extends Controller
                         $orderSaveDB->need_treatment = Order::STATUS_NEED_TREATMENT_FALSE;
                         $orderSaveDB->save();
 
-                        $responseFrontEnd[] = [
+                        $this->arrayOrder[] = [
                             'order'  => [$orderSaveDB],
                             'status' => 'GET_NHANH.VN',
                         ];
@@ -261,8 +259,8 @@ class OrderController extends Controller
                 }
 
                 if ($dequyKetQua) {
-                    $sumResponse = array_merge($responseFrontEnd, json_decode($dequyKetQua));
-                    return json_encode($sumResponse);
+                    // $sumResponse = array_merge($responseFrontEnd, json_decode($dequyKetQua));
+                    return json_encode($this->arrayOrder);
                 } else {
                     return json_encode($responseFrontEnd);
                 }
@@ -292,7 +290,7 @@ class OrderController extends Controller
     public function searchDeQuy($totalPages, $currentPage, $type, $value)
     {
         if (($totalPages - $currentPage) <= 0) {
-            return false;
+            return $this->arrayOrder;
         } else {
             $storeId = null;
 
@@ -433,13 +431,11 @@ class OrderController extends Controller
                         }
                     }
 
-                    $dequyKetQua = [];
                     if (($response->data->totalPages - $response->data->page) > 0) {
-                        $arrayOrder[] = $responseFrontEnd;
+                        $this->arrayOrder[] = $responseFrontEnd;
                         $this->searchDeQuy($response->data->totalPages, $response->data->page, $_GET['type'], $_GET['value']);
                     } else {
-                        $arrayOrder[] = $responseFrontEnd;
-                        return json_encode($arrayOrder);
+                        $this->arrayOrder[] = $responseFrontEnd;
                     }
                 }
             } else {
