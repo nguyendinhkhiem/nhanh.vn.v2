@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
+    public $arrayOrder = [];
     public function index()
     {
         $ordersSuccess = Order::whereIn('statusGHTK', [5, 6])->count();
@@ -434,9 +435,11 @@ class OrderController extends Controller
 
                     $dequyKetQua = [];
                     if (($response->data->totalPages - $response->data->page) > 0) {
-                        $dequyKetQua = $this->searchDeQuy($response->data->totalPages, $response->data->page, $_GET['type'], $_GET['value']);
+                        $arrayOrder[] = $responseFrontEnd;
+                        $this->searchDeQuy($response->data->totalPages, $response->data->page, $_GET['type'], $_GET['value']);
                     } else {
-                        return json_encode($responseFrontEnd);
+                        $arrayOrder[] = $responseFrontEnd;
+                        return json_encode($arrayOrder);
                     }
                 }
             } else {
