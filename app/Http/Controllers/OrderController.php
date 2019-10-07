@@ -385,7 +385,7 @@ class OrderController extends Controller
                             $orderSaveDB->status   = Order::STATUS_NEW_CREATEED;
                             $orderSaveDB->save();
 
-                            $responseFrontEnd[] = [
+                            $this->arrayOrder[] = [
                                 'order'  => [$orderSaveDB],
                                 'status' => 'GET_NHANH.VN',
                             ];
@@ -417,7 +417,7 @@ class OrderController extends Controller
                             }
 
                             $orderDB            = Order::where('id_nhanhvn', $order->id)->get();
-                            $responseFrontEnd[] = [
+                            $this->arrayOrder[] = [
                                 'order'  => $orderDB,
                                 'status' => 'CONTAIN_DB',
                             ];
@@ -425,10 +425,7 @@ class OrderController extends Controller
                     }
 
                     if (($response->data->totalPages - $response->data->page) > 0) {
-                        $this->arrayOrder[] = $responseFrontEnd;
                         $this->searchDeQuy($response->data->totalPages, $response->data->page, $_GET['type'], $_GET['value']);
-                    } else {
-                        $this->arrayOrder[] = $responseFrontEnd;
                     }
                 }
             } else {
