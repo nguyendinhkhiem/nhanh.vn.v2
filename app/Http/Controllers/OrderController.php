@@ -246,7 +246,7 @@ class OrderController extends Controller
                         }
 
                         $orderDB            = Order::where('id_nhanhvn', $order->id)->get();
-                        $responseFrontEnd[] = [
+                        $this->arrayOrder[] = [
                             'order'  => $orderDB,
                             'status' => 'CONTAIN_DB',
                         ];
