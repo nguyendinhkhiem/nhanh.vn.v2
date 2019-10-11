@@ -8,6 +8,12 @@ use App\Entities\Cause;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+header('Access-Control-Allow-Origin: *');
+header("Access-Control-Allow-Headers: Cookie, X-API-KEY, Origin, X-CSRF-TOKEN, X-XSRF-TOKEN, X-Requested-With, Access-Control-Allow-Origin, Authorization, Content-Type, Accept, Access-Control-Request-Method");
+header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE, PATCH");
+header("Allow: GET, POST, OPTIONS, PUT, DELETE, PATCH");
+header('Access-Control-Allow-Credentials: true');
+
 class AjaxController extends Controller
 {
     public function index(){}
