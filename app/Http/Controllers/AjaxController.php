@@ -20,7 +20,6 @@ class AjaxController extends Controller
         $ordersReturned = Order::where('statusGHTK', 21)->count();
         $ordersCanXuLy = Order::whereIn('statusGHTK', [9, 10])->where('need_treatment', 0)->count();
         $ordersCanceled = Order::where('statusGHTK', -1)->count();
-
         $data = [
             'ordersSuccess'   => $ordersSuccess,
             'ordersShipping'  => $ordersShipping,
@@ -29,24 +28,26 @@ class AjaxController extends Controller
             'ordersCanXuLy'   => $ordersCanXuLy,
             'ordersCanceled'  => $ordersCanceled
         ];
-
         return $data;
     }
 
     public function detailOrderByNhanhId($id)
     {
         $order = Order::where('id_nhanhvn', $id)->first();
-        $order_id = $order->id;
-        $products = Product::where('order_id', $order_id)->get();
-        $causes = Cause::where('order_id', $order_id)->orderBy('created_at', 'desc')->get();
 
-        $data = [
-            'order'    => $order,
-            'products' => $products,
-            'causes' => $causes
-        ];
-
-        return $data;
+        if(is_array($order)){
+            $order_id = $order->id;
+            $products = Product::where('order_id', $order_id)->get();
+            $causes = Cause::where('order_id', $order_id)->orderBy('created_at', 'desc')->get();
+            $data = [
+                'order'    => $order,
+                'products' => $products,
+                'causes' => $causes
+            ];
+            return $data;
+        }else{
+            return 'Đơn hàng chưa đăng lên GHTK!';
+        }
     }
 
 }
