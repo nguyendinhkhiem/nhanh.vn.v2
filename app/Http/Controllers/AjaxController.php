@@ -49,4 +49,30 @@ class AjaxController extends Controller
         }
     }
 
+    public function detailOrderBySearch($id)
+    {
+        $key = intval($id);
+        $order = Order::where('id_nhanhvn', 'like', "%$key%")
+            ->orWhere('label_GHTK', 'like', "%$key%")
+            ->orWhere('customerName', 'like', "%$key%")
+            ->orWhere('customerMobile', 'like', "%$key%")->first();
+
+        if(!empty($order)){
+            $order_id = $order->id;
+            $products = Product::where('order_id', $order_id)->get();
+            $causes = Cause::where('order_id', $order_id)->orderBy('created_at', 'desc')->get();
+            $data = [
+                'order'    => $order,
+                'products' => $products,
+                'causes' => $causes
+            ];
+            return $data;
+        }else{
+            return 'Đơn hàng chưa đăng lên GHTK!';
+        }
+    }
+
+
+
+    
 }

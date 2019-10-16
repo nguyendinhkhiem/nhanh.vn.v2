@@ -60,3 +60,4 @@ Route::post('/create-cause', 'OrderController@createCause');
 
 Route::get('/ajax/count_order', 'AjaxController@CountOrder');
 Route::get('/ajax/search_order_id/{id}', 'AjaxController@detailOrderByNhanhId');
+Route::get('/ajax/search_order_key/{id}', 'AjaxController@detailOrderBySearch');
