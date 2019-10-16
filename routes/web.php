@@ -59,3 +59,4 @@ Route::get('reset-order', 'OrderController@resetStatusOrder');
 Route::post('/create-cause', 'OrderController@createCause');
 
 Route::get('/ajax/count_order', 'AjaxController@CountOrder');
+Route::get('/ajax/search_order_id/{id}', 'AjaxController@detailOrderByNhanhId');
