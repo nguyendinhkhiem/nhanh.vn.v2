@@ -8,12 +8,6 @@ use App\Entities\Cause;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-header('Access-Control-Allow-Origin: *');
-header("Access-Control-Allow-Headers: Cookie, X-API-KEY, Origin, X-CSRF-TOKEN, X-XSRF-TOKEN, X-Requested-With, Access-Control-Allow-Origin, Authorization, Content-Type, Accept, Access-Control-Request-Method");
-header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE, PATCH");
-header("Allow: GET, POST, OPTIONS, PUT, DELETE, PATCH");
-header('Access-Control-Allow-Credentials: true');
-
 class AjaxController extends Controller
 {
     public function index(){}
@@ -38,4 +32,21 @@ class AjaxController extends Controller
 
         return $data;
     }
+
+    public function detailOrderByNhanhId($id)
+    {
+        $order = Order::where('id_nhanhvn', $id)->first();
+        $order_id = $order->id;
+        $products = Product::where('order_id', $order_id)->get();
+        $causes = Cause::where('order_id', $order_id)->orderBy('created_at', 'desc')->get();
+
+        $data = [
+            'order'    => $order,
+            'products' => $products,
+            'causes' => $causes
+        ];
+
+        return $data;
+    }
+
 }
