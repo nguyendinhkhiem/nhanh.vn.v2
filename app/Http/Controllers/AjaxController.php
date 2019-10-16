@@ -34,8 +34,7 @@ class AjaxController extends Controller
     public function detailOrderByNhanhId($id)
     {
         $order = Order::where('id_nhanhvn', $id)->first();
-
-        if(is_array($order)){
+        if(!empty($order)){
             $order_id = $order->id;
             $products = Product::where('order_id', $order_id)->get();
             $causes = Cause::where('order_id', $order_id)->orderBy('created_at', 'desc')->get();
