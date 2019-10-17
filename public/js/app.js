@@ -37198,12 +37198,12 @@ $(document).ready(function () {
 
   $('#search_order_list_info').submit(function (e) {
     e.preventDefault();
-    $('.loading').addClass('active');
-    var type = $(this).find('#type_serch_input').val();
+    $('.loading').addClass('active'); // var type = $(this).find('#type_serch_input').val();
+
     var input = $(this).find('#search_order_input').val();
     window.axios.post('/api/sort-order/keyword', {
       params: {
-        type: type,
+        // type: type,
         value: input
       }
     }).then(function (response) {
@@ -37219,6 +37219,8 @@ $(document).ready(function () {
             htmlItem += '<td>' + order.label_GHTK + '</td>';
             htmlItem += '<td>' + order.customerName + '</td>';
             htmlItem += '<td>' + order.customerMobile + '</td>';
+            htmlItem += '<td>' + order.customerCity + '</td>';
+            htmlItem += '<td>' + order.customerDistrict + '</td>';
 
             try {
               if (order.products) {
