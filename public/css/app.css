@@ -11188,7 +11188,7 @@ a.text-dark:focus {
 }
 
 .header_order .search_order #search_order_list_info .input_search {
-  width: 60%;
+  width: 80%;
 }
 
 .header_order .search_order #search_order_list_info .input_search input {
@@ -11198,6 +11198,7 @@ a.text-dark:focus {
   border: 1px solid #e8e9eb;
   padding-left: 15px;
   color: black;
+  border-radius: 5px 0 0 5px;
 }
 
 .header_order .search_order #search_order_list_info .button_submit input {
