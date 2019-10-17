@@ -523,7 +523,7 @@
             }
 
             .input_search {
-                width: 60%;
+                width: 80%;
 
                 input {
                     height: 50px;
@@ -532,6 +532,7 @@
                     border: 1px solid #e8e9eb;
                     padding-left: 15px;
                     color: black;
+                    border-radius: 5px 0 0 5px;
                 }
             }
 
