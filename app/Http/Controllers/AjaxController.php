@@ -52,10 +52,23 @@ class AjaxController extends Controller
     public function detailOrderBySearch($id)
     {
         $key = intval($id);
-        $order = Order::where('id_nhanhvn', 'like', "%$key%")
-            ->orWhere('label_GHTK', 'like', "%$key%")
-            ->orWhere('customerName', 'like', "%$key%")
-            ->orWhere('customerMobile', 'like', "%$key%")->first();
+
+        // $order = Order::where('id_nhanhvn', 'like', "%{$key}%")
+        //     ->orWhere('label_GHTK', 'like', "%$key%")
+        //     ->orWhere('customerName', 'like', "%$key%")
+        //     ->orWhere('customerMobile', 'like', "%$key%")
+        //     ->orderBy('id_nhanhvn','DESC')
+        //     ->get();
+
+        $order = Order::query()
+            ->where('id_nhanhvn', 'like', "%{$key}%")
+            ->orWhere('label_GHTK', 'like', "%{$key}%")
+            ->orWhere('customerName', 'like', "%{$key}%")
+            ->orWhere('customerMobile', 'like', "%{$key}%")
+            // ->orderBy('id_nhanhvn','DESC')
+            ->first();
+
+        // dd($order);exit();
 
         if(!empty($order)){
             $order_id = $order->id;
