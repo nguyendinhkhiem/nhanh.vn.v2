@@ -43,9 +43,7 @@ class OrderController extends Controller
     public function singleOrder($id)
     {
         $order = Order::where('id', $id)->first();
-
         $products = Product::where('order_id', $id)->get();
-
         $causes = Cause::where('order_id', $id)->orderBy('created_at', 'desc')->get();
 
         $data = [

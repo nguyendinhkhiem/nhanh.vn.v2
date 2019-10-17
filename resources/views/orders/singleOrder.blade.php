@@ -64,6 +64,36 @@
 					</li> -->
 				</ul>
 			</div>
+
+			<div class="info-giaohang">
+				<ul>
+					<li>
+						<span class="label">Trạng thái đơn:</span> 
+						@if ($order->statusGHTK == '-1')
+							<span class="Dahuy">Đã huỷ</span>
+						@elseif ($order->statusGHTK == '4' || $order->statusGHTK == '3'|| $order->statusGHTK == '2')
+							<span class="Dangchuyen">Đang giao hàng</span>
+						@elseif ($order->statusGHTK == '5' || $order->statusGHTK == '6')
+							<span class="Thanhcong">Thành công</span>
+						@elseif ($order->statusGHTK == '9' || $order->statusGHTK == '10')
+							<span class="Canxuly">Cần xử lý</span>
+						@elseif ($order->statusGHTK == '20')
+							<span class="Dangchuyenhoan">Đang chuyển hoàn</span>
+						@elseif ($order->statusGHTK == '21')
+							<span class="Dahoan">Đã hoàn</span>
+						@else
+							{{ $order->statusGHTK }}
+						@endif
+					</li>
+					<li>
+						<span class="label">Lý do:</span> {{ $order->reason_code }}
+					</li>
+					<li>
+						<span class="label">Ghi chú giao hàng:</span> {{ $order->reason }}
+					</li>
+				</ul>
+			</div>
+
 		</div>
 		<div class="list_products">
 			<table class="table table-bordered">
