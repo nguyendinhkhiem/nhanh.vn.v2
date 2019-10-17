@@ -59,7 +59,7 @@
 			<div class="search_order">
 				<form id="search_order_list_info">
 					@csrf
-					<div class="choice_type_search">
+					<!-- <div class="choice_type_search">
 						<input type="hidden" id="type_serch_input" name="type_serch_input" value="label_GHTK">
 						<p class="type_current_order">
 							<span class="name">ID Giao Hàng Tiết Kiệm</span>
@@ -90,7 +90,7 @@
 								Địa Chỉ Khách Hàng
 							</li>
 						</ul>
-					</div>
+					</div> -->
 					<div class="input_search">
 						<input type="text" value="" name="search_order_input" required="true" id="search_order_input" placeholder="Nhập thông tin">
 					</div>

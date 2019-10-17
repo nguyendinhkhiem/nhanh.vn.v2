@@ -13,8 +13,15 @@ class SortOrderController extends Controller
     public function sortByKeyList(Request $request)
     {
         $data = $request->all();
+        $id = $data['params']['value'];
+        // $querry = Order::where($data['params']['type'], 'like', "%{$data['params']['value']}%");
 
-        $querry = Order::where($data['params']['type'], 'like', "%{$data['params']['value']}%");
+        $querry = Order::where(function ($query) use ($id) {     
+            $query->orWhere('label_GHTK', 'like', "%$id%");
+            $query->orWhere('customerName', 'like', "%$id%");
+            $query->orWhere('customerMobile', 'like', "%$id%");
+            $query->orWhere('id_nhanhvn', 'like', "%$id%");
+        });
 
         $listOrders = $querry->get();
         $count = $querry->get()->count();
