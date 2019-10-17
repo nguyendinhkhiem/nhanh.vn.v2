@@ -82,6 +82,10 @@ class RegisterWebHookController extends Controller
         $orderNhanh = Order::where('label_GHTK', $data['label_id'])->update(
             [
                 'statusGHTK' => $data['status_id'],
+                // Here
+                'reason_code' => $data['reason_code'],
+                'reason' => $data['reason'],
+                // End Here
                 'need_treatment' => 0
             ]
         );
