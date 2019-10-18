@@ -77,10 +77,7 @@ class AjaxController extends Controller
         ->get();
 
         if(!empty($order)){
-            $data = [
-                'order'    => $order
-            ];
-            return $data;
+            return $order;
         }else{
             return 'Đơn hàng chưa đăng lên GHTK!';
         }
