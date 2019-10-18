@@ -69,5 +69,19 @@ class AjaxController extends Controller
         }
     }
 
+
+    public function getListOrderNeedTreetment()
+    {
+        $order = Order::whereIn('statusGHTK', [9, 10])
+        ->where('need_treatment', 1)
+        ->get();
+
+        if(!empty($order)){
+            return $order;
+        }else{
+            return 'Đơn hàng chưa đăng lên GHTK!';
+        }
+    }
+
     
 }
