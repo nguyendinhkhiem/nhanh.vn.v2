@@ -78,16 +78,15 @@ class RegisterWebHookController extends Controller
     {
         $data = $request->all();
         Log::info($data);
-
         $orderGhtk = Deliverys::where('label', $data['label_id'])->update(['status_id' => $data['status_id']]);
         $getreason = Order::where('label_GHTK', $data['label_id'])->get('reason');
         $getreason = json_decode($getreason);
-        // dd($getreason);exit();
-        // echo $getreason[0]->reason;exit();
 
-        if (!is_null($getreason)) {
+        if (!is_null($getreason[0]->reason)) {
             $getreason = json_decode($getreason[0]->reason);
-            // dd($getreason);exit();
+            if(empty($getreason)){
+                $getreason = array();
+            }
             array_push($getreason, $data['reason']);
             $getreason = json_encode($getreason);
             $orderNhanh = Order::where('label_GHTK', $data['label_id'])->update(
