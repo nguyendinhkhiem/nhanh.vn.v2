@@ -443,7 +443,7 @@ class OrderController extends Controller
 
         foreach ($orders as $key => $item) {
             $orderUpdate = Order::where('id', $item->id)->update([
-                'need_treatment' => 0
+                'reason' => null
             ]);
         }
 
