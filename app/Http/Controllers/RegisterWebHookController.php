@@ -78,17 +78,39 @@ class RegisterWebHookController extends Controller
     {
         $data = $request->all();
         Log::info($data);
-        $orderGhtk  = Deliverys::where('label', $data['label_id'])->update(['status_id' => $data['status_id']]);
-        $orderNhanh = Order::where('label_GHTK', $data['label_id'])->update(
-            [
-                'statusGHTK' => $data['status_id'],
-                // Here
-                'reason_code' => $data['reason_code'],
-                'reason' => $data['reason'],
-                // End Here
-                'need_treatment' => 0
-            ]
-        );
+
+        $orderGhtk = Deliverys::where('label', $data['label_id'])->update(['status_id' => $data['status_id']]);
+        $getreason = Order::where('label_GHTK', $data['label_id'])->get('reason');
+        $getreason = json_decode($getreason);
+        // dd($getreason);exit();
+        // echo $getreason[0]->reason;exit();
+
+        if (!is_null($getreason)) {
+            $getreason = json_decode($getreason[0]->reason);
+            // dd($getreason);exit();
+            array_push($getreason, $data['reason']);
+            $getreason = json_encode($getreason);
+            $orderNhanh = Order::where('label_GHTK', $data['label_id'])->update(
+                [
+                    'statusGHTK' => $data['status_id'],
+                    'reason_code' => $data['reason_code'],
+                    'reason' => $getreason,
+                    'need_treatment' => 0
+                ]
+            );
+        }else{
+            $myArray = array($data['reason']);
+            $myArray = json_encode($myArray);
+            $orderNhanh = Order::where('label_GHTK', $data['label_id'])->update(
+                [
+                    'statusGHTK' => $data['status_id'],
+                    'reason_code' => $data['reason_code'],
+                    'reason' => $myArray,
+                    'need_treatment' => 0
+                ]
+            );
+        }
+
         Log::info($orderGhtk);
         Log::info($orderNhanh);
         return response()->json(['success' => true]);
