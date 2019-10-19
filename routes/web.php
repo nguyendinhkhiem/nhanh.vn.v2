@@ -57,9 +57,7 @@ Route::get('reset-order', 'OrderController@resetStatusOrder');
 
 // create cause
 Route::post('/create-cause', 'OrderController@createCause');
-
-Route::get('/resetdata', 'OrderController@resetStatusOrder');
-
+// Route::get('/resetdata', 'OrderController@resetStatusOrder');
 
 Route::get('/ajax/count_order', 'AjaxController@CountOrder');
 Route::get('/ajax/list_need_treetment', 'AjaxController@getListOrderNeedTreetment');
