@@ -203,11 +203,13 @@ class OrderController extends Controller
                             $products_id[] = [
                                 'id'       => $product->productId,
                                 'name'     => $product->productName,
+                                'code'     => $product->productCode,
                                 'quantity' => $product->quantity,
                                 'weight'   => $product->weight,
                             ];
                         }
                         $orderSaveDB->products       = json_encode($products_id);
+
                         $orderSaveDB->status         = Order::STATUS_NEW_CREATEED;
                         $orderSaveDB->need_treatment = Order::STATUS_NEED_TREATMENT_FALSE;
                         $orderSaveDB->save();
