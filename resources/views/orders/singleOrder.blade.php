@@ -89,7 +89,16 @@
 						<span class="label">Lý do:</span> {{ $order->reason_code }}
 					</li>
 					<li>
-						<span class="label">Ghi chú giao hàng:</span> {{ $order->reason }}
+						<span class="label">Ghi chú giao hàng:</span>
+						@php
+							$dataOrder = json_decode($order->reason);
+							
+						@endphp
+						<ul>
+						@foreach ($dataOrder as $data)
+							<li>{{ $data }}</li>
+						@endforeach
+						</ul>
 					</li>
 				</ul>
 			</div>
