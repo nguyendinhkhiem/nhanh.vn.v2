@@ -32,20 +32,21 @@ class OrderGiaoHangTietKiemControllers extends Controller
         $newArray = [];
         foreach ($data['params']['data_id'] as $key => $item) {
             $order = Order::where('id_nhanhvn', $item)->first();
-            // $dataProducts = json_decode($order->products);
-            // foreach ($dataProducts as $product) {
-            //     $orderDataGHTK[$key]['products'][] = [
-            //         "name"     => $product->name,
-            //         "weight"   => 0.1,
-            //         "quantity" => (int) $product->quantity,
-            //     ];
-            // }
 
-            $orderDataGHTK[$key]['products'][] = [
-                "name"     => 'Phụ kiện Phương Dung - Bộ vòng cổ cao cấp',
-                "weight"   => 0.1,
-                "quantity" => 1,
-            ];
+            $dataProducts = json_decode($order->products);
+            foreach ($dataProducts as $product) {
+                $orderDataGHTK[$key]['products'][] = [
+                    "name"     => 'Bộ vòng cổ '.$product->code,
+                    "weight"   => 0.01,
+                    "quantity" => (int) $product->quantity,
+                ];
+            }
+
+            // $orderDataGHTK[$key]['products'][] = [
+            //     "name"     => 'Phụ kiện Phương Dung - Bộ vòng cổ cao cấp',
+            //     "weight"   => 0.1,
+            //     "quantity" => 1,
+            // ];
 
             $orderDataGHTK[$key]['order'] = [
                 "id"            => $order->id_nhanhvn,
