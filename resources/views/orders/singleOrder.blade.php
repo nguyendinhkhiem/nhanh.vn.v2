@@ -90,15 +90,18 @@
 					</li>
 					<li>
 						<span class="label">Ghi chú giao hàng:</span>
-						@php
-							$dataOrder = json_decode($order->reason);
-							
-						@endphp
-						<ul>
-						@foreach ($dataOrder as $data)
-							<li>{{ $data }}</li>
-						@endforeach
-						</ul>
+						@if ($order->reason != null)
+							@php
+								$dataOrder = json_decode($order->reason);
+							@endphp
+							<ul>
+							@foreach ($dataOrder as $data)
+								<li>{{ $data }}</li>
+							@endforeach
+							</ul>
+						@else
+							Chưa có ghi chú giao hàng
+						@endif						
 					</li>
 				</ul>
 			</div>
