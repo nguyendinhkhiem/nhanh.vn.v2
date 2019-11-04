@@ -82,37 +82,44 @@ class RegisterWebHookController extends Controller
         $getreason = Order::where('label_GHTK', $data['label_id'])->get('reason');
         $getreason = json_decode($getreason);
 
-        if (!is_null($getreason[0]->reason)) {
-            $getreason = json_decode($getreason[0]->reason);
-            if(empty($getreason)){
-                $getreason = array();
-            }
-            array_push($getreason, $data['reason']);
-            $getreason = json_encode($getreason);
-            $orderNhanh = Order::where('label_GHTK', $data['label_id'])->update(
-                [
-                    'statusGHTK' => $data['status_id'],
-                    'reason_code' => $data['reason_code'],
-                    'reason' => $getreason,
-                    'need_treatment' => 0
-                ]
-            );
-        }else{
-            $myArray = array($data['reason']);
-            $myArray = json_encode($myArray);
-            $orderNhanh = Order::where('label_GHTK', $data['label_id'])->update(
-                [
-                    'statusGHTK' => $data['status_id'],
-                    'reason_code' => $data['reason_code'],
-                    'reason' => $myArray,
-                    'need_treatment' => 0
-                ]
-            );
-        }
+        // Update status_id, reason_code
+        $orderNhanh = Order::where('label_GHTK', $data['label_id'])->update(
+            [
+                'statusGHTK' => $data['status_id'],
+                'reason_code' => $data['reason_code'],
+                'need_treatment' => 0
+            ]
+        );
 
-        Log::info($orderGhtk);
-        Log::info($orderNhanh);
-        return response()->json(['success' => true]);
+        // Update reason to DB
+        if(!is_null($data['reason'])){
+
+            if (!is_null($getreason[0]->reason)) {
+                $getreason = json_decode($getreason[0]->reason);
+                if(empty($getreason)){
+                    $getreason = array();
+                }
+                array_push($getreason, $data['reason']);
+                $getreason = json_encode($getreason);
+                $orderNhanh = Order::where('label_GHTK', $data['label_id'])->update(
+                    [
+                        'reason' => $getreason
+                    ]
+                );
+            }else{
+                $myArray = array($data['reason']);
+                $myArray = json_encode($myArray);
+                $orderNhanh = Order::where('label_GHTK', $data['label_id'])->update(
+                    [
+                        'reason' => $myArray
+                    ]
+                );
+            }
+            Log::info($orderGhtk);
+            Log::info($orderNhanh);
+            return response()->json(['success' => true]);
+        }
+        
     }
 
     public function test()
